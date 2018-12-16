@@ -1,5 +1,5 @@
 bl_info = {
-    "name" : "FLIP Fluids",
+    "name" : "MarvelPyhics",
     "description": "A FLIP Fluid Simulation Tool for Blender",
     "author" : "Ryan Guy <ryan.l.guy[at]gmail.com>, Dennis Fassbaender <info[at]df-videos.de>",
     "version" : (0, 0, 1),

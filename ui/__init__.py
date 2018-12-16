@@ -50,6 +50,6 @@ def register():
     bpy.types.PHYSICS_PT_add.append(append_to_PHYSICS_PT_add_panel)
 
 def unregister():
-    xsimulate_ui.unregister()
+    simulate_ui.unregister()
     bpy.types.PHYSICS_PT_add.remove(append_to_PHYSICS_PT_add_panel)
 
