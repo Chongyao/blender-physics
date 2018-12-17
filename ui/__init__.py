@@ -18,7 +18,7 @@ def append_to_PHYSICS_PT_add_panel(self, context):
     if obj.flip_fluid.is_active:
         column_right.operator(
                 "flip_fluid_operators.flip_fluid_remove", 
-                 text="FLIP Fluid", 
+                 text="Marvel Physics", 
                  icon='X'
                 )
     else:
@@ -34,13 +34,13 @@ def append_to_PHYSICS_PT_add_panel(self, context):
             """
             column_right.operator(
                     "flip_fluid_operators.flip_fluid_add", 
-                    text="FLIP Fluid", 
+                    text="Marvel Physics", 
                     icon='MOD_FLUIDSIM'
                     )
         else:
             column_right.operator(
                     "flip_fluid_operators.flip_fluid_add", 
-                    text="FLIP Fluid", 
+                    text="Marvel Physics", 
                     icon='MOD_FLUIDSIM'
                     )
 
