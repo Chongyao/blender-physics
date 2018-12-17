@@ -1,0 +1,23 @@
+if "bpy" in locals():
+    import importlib
+    reloadable_modules = [
+
+    ]
+    for module_name in reloadable_modules:
+        if module_name in locals():
+            importlib.reload(locals()[module_name])
+
+import bpy
+from bpy.props import(
+    BoolProperty,
+    PointerProperty
+)
+
+class PhysiKaObjectProperties(bpy.types.PropertyGroup):
+    @classmethod
+    def register(cls):
+        bpy.types.Object.physika = PointerProperty(
+            name="PhysiKa Object Properties",
+            description="",
+            type=cls
+        )

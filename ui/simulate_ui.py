@@ -7,11 +7,11 @@ class simulation_panel(bpy.types.Panel):
     bl_space_type = 'PROPERTIES'
     bl_region_type = 'WINDOW'
     bl_context = "physics"
-    bl_category = "Marvel Physics"
+    bl_category = "PhysiKa"
     
 
     def draw(self, context):
-        layout = self.layouts
+        layout = self.layout
 
         scene = context.scene
 

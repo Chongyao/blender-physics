@@ -1,3 +1,13 @@
+if "bpy" in locals():
+    import importlib
+    reloadable_modules = [
+        'simulate_ui'
+        
+    ]
+    for module_name in reloadable_modules:
+        if module_name in locals():
+            importlib.reload(locals()[module_name])
+
 import bpy
 
 from . import(
@@ -15,33 +25,33 @@ def append_to_PHYSICS_PT_add_panel(self, context):
     column_left = split.column()
     column_right = split.column()
 
-    if obj.flip_fluid.is_active:
+    if obj.physika.is_active:
         column_right.operator(
-                "flip_fluid_operators.flip_fluid_remove", 
-                 text="Marvel Physics", 
+                "physika_operators.physika_remove", 
+                 text="PhysiKa", 
                  icon='X'
                 )
     else:
-        icon = context.scene.flip_fluid.get_logo_icon()
+        icon = context.scene.physika.get_logo_icon()
         if icon is not None:
             # Icon needs to be reworked
             """
             column_right.operator(
-                    "flip_fluid_operators.flip_fluid_add", 
+                    "physika_operators.physika_add", 
                     text="FLIP Fluid", 
-                    icon_value=context.scene.flip_fluid.get_logo_icon().icon_id
+                    icon_value=context.scene.physika.get_logo_icon().icon_id
                     )
             """
             column_right.operator(
-                    "flip_fluid_operators.flip_fluid_add", 
-                    text="Marvel Physics", 
-                    icon='MOD_FLUIDSIM'
+                    "physika_operators.physika_add", 
+                    text="PhysiKa", 
+                    icon='MOD_SOLIDIFY'
                     )
         else:
             column_right.operator(
-                    "flip_fluid_operators.flip_fluid_add", 
-                    text="Marvel Physics", 
-                    icon='MOD_FLUIDSIM'
+                    "physika_operators.physika_add", 
+                    text="PhysiKa", 
+                    icon='MOD_SOLIDIFY'
                     )
 
 
