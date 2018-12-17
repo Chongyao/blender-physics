@@ -2,14 +2,19 @@ import bpy
 
 class simulation_panel(bpy.types.Panel):
     """Creates a Panel in the scene context of the properties editor"""
-    bl_label = "Layout Demo"
-    bl_idname = "SCENE_PT_layout"
+    # bl_idname = "SCENE_PT_layout"
     bl_space_type = 'PROPERTIES'
     bl_region_type = 'WINDOW'
     bl_context = "physics"
     bl_category = "PhysiKa"
+    bl_label = "PhysiKa"
     
 
+    @classmethod
+    def poll(cls, context):
+        obj_props = context.scene.objects.active.physika
+        return obj_props.is_active
+    
     def draw(self, context):
         layout = self.layout
 

@@ -4,7 +4,7 @@ bl_info = {
     "author" : "Ryan Guy <ryan.l.guy[at]gmail.com>, Dennis Fassbaender <info[at]df-videos.de>",
     "version" : (0, 0, 1),
     "blender" : (2, 7, 8),
-    "location" : "Properties > Physics > Marvel Physics",
+    "location" : "Properties > Physics > PhysiKa",
     "warning" : "Still developing",
     "wiki_url" : "",
     "tracker_url" : "",

@@ -42,11 +42,6 @@ class PhysiKaProperties(bpy.types.PropertyGroup):
         del bpy.types.Scene.physika
 
 
-    def scene_update_post(self, scene):
-        if not self.is_custom_icons_loaded:
-            self._initialize_custom_icons()
-
-
     def is_domain_object_set(self):
         for obj in bpy.data.objects:
             if obj.physika.is_domain():
@@ -145,16 +140,9 @@ class PhysiKaProperties(bpy.types.PropertyGroup):
         return objects
 
 
-    def get_logo_icon(self):
-        return self.custom_icons.get(self.logo_name)
 
 
-    def _initialize_custom_icons(self):
-        addon_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        logo_path = os.path.join(addon_dir, "icons", "flip_fluids_logo.png")
-        self.custom_icons.clear()
-        self.custom_icons.load(self.logo_name, logo_path, 'IMAGE')
-        self.is_custom_icons_loaded = True
+
 
 
 def scene_update_post(scene):

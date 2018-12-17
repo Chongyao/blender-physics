@@ -22,7 +22,7 @@ class PhysiKaObjectProperties(bpy.types.PropertyGroup):
             description="",
             type=cls
         )
-        """DO NOT WHAT THIS IS FOR"""
+        """DO NOT KNOW WHAT THIS IS FOR"""
         cls.object_type = EnumProperty(
                 name="Type",
                 description="Type of participation in the FLIP fluid simulation",

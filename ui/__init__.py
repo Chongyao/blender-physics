@@ -32,27 +32,12 @@ def append_to_PHYSICS_PT_add_panel(self, context):
                  icon='X'
                 )
     else:
-        icon = context.scene.physika.get_logo_icon()
-        if icon is not None:
-            # Icon needs to be reworked
-            """
-            column_right.operator(
-                    "physika_operators.physika_add", 
-                    text="FLIP Fluid", 
-                    icon_value=context.scene.physika.get_logo_icon().icon_id
-                    )
-            """
-            column_right.operator(
-                    "physika_operators.physika_add", 
-                    text="PhysiKa", 
-                    icon='MOD_SOLIDIFY'
-                    )
-        else:
-            column_right.operator(
-                    "physika_operators.physika_add", 
-                    text="PhysiKa", 
-                    icon='MOD_SOLIDIFY'
-                    )
+
+        column_right.operator(
+            "physika_operators.physika_add", 
+            text="PhysiKa", 
+            icon='MOD_SOLIDIFY'
+        )
 
 
 def register():
