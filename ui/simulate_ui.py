@@ -14,17 +14,27 @@ class simulation_panel(bpy.types.Panel):
     def poll(cls, context):
         obj_props = context.scene.objects.active.physika
         return obj_props.is_active
+
+
+    def draw_bake_operator(self, context, box):
+        column = box.column(align=True)
+        column.operator("physika_operators.bake_physika_simulation",
+                        text = "Bake")
+
     
     def draw(self, context):
-        layout = self.layout
+        obj_props = context.scene.objects.active.physika
 
-        scene = context.scene
+        column = self.layout.column()
+        # column.prop(obj_props, "object_type")
         
-        # Big Bake
-        layout.label(text="Bake:")
-        row = layout.row()
-        row.scale_y = 3.0
-        row.operator("render.render")
+        box = self.layout.box()
+
+        col_test = box.column()
+
+        self.draw_bake_operator(context, box)
+
+    
 
 
 
@@ -39,3 +49,5 @@ def unregister():
 
 if __name__ == "__main__":
     register()
+
+    

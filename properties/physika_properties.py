@@ -31,7 +31,7 @@ class PhysiKaProperties(bpy.types.PropertyGroup):
                 type=cls,
                 )
 
-        cls.custom_icons = bpy.utils.previews.new()
+        # cls.custom_icons = bpy.utils.previews.new()
         cls.is_custom_icons_loaded = BoolProperty(False)
         cls.logo_name = StringProperty("flip_fluids_logo")
         cls.domain_object_name = StringProperty(default="")

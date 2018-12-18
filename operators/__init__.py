@@ -44,7 +44,7 @@ from . import (
         # export_operators,
         # material_operators,
         # preset_operators,
-        # bake_operators,
+        bake_operators,
         # draw_operators,
         # helper_operators
         )
@@ -59,7 +59,7 @@ def register():
     # export_operators.register()
     # material_operators.register()
     # preset_operators.register()
-    # bake_operators.register()
+    bake_operators.register()
     # draw_operators.register()
     # helper_operators.register()
 
@@ -73,6 +73,6 @@ def unregister():
     # export_operators.unregister()
     # material_operators.unregister()
     # preset_operators.unregister()
-    # bake_operators.unregister()
+    bake_operators.unregister()
     # draw_operators.unregister()
     # helper_operators.unregister()
