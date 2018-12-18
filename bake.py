@@ -8,5 +8,5 @@ def bake():
     physika_exe = "simple-translation"
     exe_cmd = physika_exe_path + physika_exe  + " " + physika_exe_path + "input.obj" + " " + physika_exe_path + "output"
     args = shlex.split(exe_cmd)
-    
-    subprocess.run(args)
+    res = subprocess.run(args)
+    return res.returncode

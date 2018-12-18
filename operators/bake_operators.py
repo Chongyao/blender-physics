@@ -15,7 +15,9 @@ class BakePhysiKaSimulation(bpy.types.Operator):
         
     def run_simulation(self, obj):
         self.export_model();
-        bake.bake()
+        res = bake.bake()
+        if res is 0:
+            
     
     def execute(self, context):
         print(context.scene)
