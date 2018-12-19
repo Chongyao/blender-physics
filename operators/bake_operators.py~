@@ -1,3 +1,0 @@
-import bpy
-
-class BakePhysiKaSimulation(bpy.types.Operator);
