@@ -1,7 +1,7 @@
 if "bpy" in locals():
     import importlib
     reloadable_modules = [
-
+        'bake_properties'
     ]
     for module_name in reloadable_modules:
         if module_name in locals():
@@ -13,6 +13,10 @@ from bpy.props import(
     EnumProperty,
     PointerProperty,
 )
+from . import(
+    bake_properties
+)
+
 from .. import types
 class PhysiKaObjectProperties(bpy.types.PropertyGroup):
     @classmethod
@@ -31,9 +35,13 @@ class PhysiKaObjectProperties(bpy.types.PropertyGroup):
                 get=lambda self: self._get_object_type(),
                 set=lambda self, value: self._set_object_type(value),
                 update=lambda self, context: self._update_object_type(context),
-                )
+        )
         cls.is_active = BoolProperty(default=False)
-        
+        cls.bake = PointerProperty(
+            name = 'Physika Bake Properties',
+            description = '',
+            type = bake_properties.PyhsikaBakeProperties   
+        )
     @classmethod    
     def unregister(cls):
         del bpy.types.Object.physika
@@ -48,7 +56,10 @@ class PhysiKaObjectProperties(bpy.types.PropertyGroup):
         pass
         
 def register():
+    bake_properties.register()
     bpy.utils.register_class(PhysiKaObjectProperties)
+    
 
 def unregister():
+    bake_properties.unregister()
     bpy.utils.unregister_class(PhysiKaObjectProperties)

@@ -17,8 +17,10 @@ class BakePhysiKaSimulation(bpy.types.Operator):
     def run_simulation(self, obj):
         self.export_model();
         res = bake.bake()
-        pass
-        
+        if res is 0:
+            obj.physika.bake.is_bake_finished = True
+            
+    
     
     def execute(self, context):
         print(os.path.realpath(__file__))

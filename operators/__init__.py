@@ -20,7 +20,7 @@ if "bpy" in locals():
         'error_operators',
         'preferences_operators',
         'object_operators',
-        'render_operators',
+        'animate_operators',
         'cache_operators',
         'export_operators',
         'material_operators',
@@ -39,7 +39,7 @@ from . import (
         # error_operators,
         # preferences_operators,
         object_operators,
-        # render_operators,
+        animate_operators,
         # cache_operators,
         # export_operators,
         # material_operators,
@@ -54,7 +54,7 @@ def register():
     # error_operators.register()
     # preferences_operators.register()
     object_operators.register()
-    # render_operators.register()
+    animate_operators.register()
     # cache_operators.register()
     # export_operators.register()
     # material_operators.register()
@@ -68,7 +68,7 @@ def unregister():
     # error_operators.unregister()
     # preferences_operators.unregister()
     object_operators.unregister()
-    # render_operators.unregister()
+    animate_operators.unregister()
     # cache_operators.unregister()
     # export_operators.unregister()
     # material_operators.unregister()

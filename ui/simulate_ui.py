@@ -24,14 +24,8 @@ class simulation_panel(bpy.types.Panel):
     
     def draw(self, context):
         obj_props = context.scene.objects.active.physika
-
-        column = self.layout.column()
-        # column.prop(obj_props, "object_type")
-        
         box = self.layout.box()
-
-        col_test = box.column()
-
+        
         self.draw_bake_operator(context, box)
 
     
@@ -47,7 +41,7 @@ def unregister():
     bpy.utils.unregister_class(simulation_panel)
 
 
-if __name__ == "__main__":
-    register()
+# if __name__ == "__main__":
+#     register()
 
     
