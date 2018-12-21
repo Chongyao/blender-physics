@@ -1,12 +1,14 @@
-import bpy,subprocess,shlex
+import bpy,subprocess,shlex,os,pathlib
 
 
 
 def bake():
     """ Wirte by this way temporarily"""
-    physika_exe_path = "/home/zcy/.config/blender/2.79/scripts/addons/blender-physics/lib/simple-translation/build/"
-    physika_exe = "simple-translation"
-    exe_cmd = physika_exe_path + physika_exe  + " " + physika_exe_path + "input.obj" + " " + physika_exe_path + "output"
-    args = shlex.split(exe_cmd)
-    res = subprocess.run(args)
+    raw_path = os.getcwd()
+    
+    script_path = os.path.dirname(os.path.realpath(__file__))
+    os.chdir(script_path)
+    os.chdir('lib/simple-translation/build')
+    
+    res = subprocess.run(['./simple-translation', '../input/input.obj','../output'])
     return res.returncode
