@@ -48,14 +48,40 @@ class MeshLoader(object):
         new_mesh_data.from_pydata(vertexs, [], triangles)
 
         cache_object = self.get_physika_object()
+        old_mesh_data = cache_object.data
+
+        cache_object.data = new_mesh_data
+        old_mesh_data.user_clear()
+        bpy.data.meshes.remove(old_mesh_data)        
+
+        print("here")
         
-        
+        """transform"""
 
     def get_physika_object(self):
         for obj in bpy.data.objects:
-            print(obj.name, " is : ", obj.physika.is_active)
+            if obj.physika.is_active == True:
+                return obj
+            
 
-                
+    def update_transforms(self):
+        cache_object = self.get_cache_object()
+        transvect = mathutils.Vector((self.bounds.x, self.bounds.y, self.bounds.z))
+        transmat = mathutils.Matrix.Translation(-transvect)
+        cache_object.data.transform(transmat)
+        domain_object = self._get_domain_object()
+        domain_bounds = AABB.from_blender_object(domain_object)
+
+        domain_pos = mathutils.Vector((domain_bounds.x, domain_bounds.y, domain_bounds.z))
+        scalex = (math.ceil(domain_bounds.xdim / self.bounds.dx) * self.bounds.dx) / self.bounds.width
+        scaley = (math.ceil(domain_bounds.ydim / self.bounds.dx) * self.bounds.dx) / self.bounds.height
+        scalez = (math.ceil(domain_bounds.zdim / self.bounds.dx) * self.bounds.dx) / self.bounds.depth
+        scale = min(scalex, scaley, scalez)
+        cache_object.matrix_world = mathutils.Matrix.Identity(4)
+        cache_object.matrix_parent_inverse = domain_object.matrix_world.inverted()
+        cache_object.scale = (scale, scale, scale)
+        cache_object.location = domain_pos
+    
             
         
 # def register():
