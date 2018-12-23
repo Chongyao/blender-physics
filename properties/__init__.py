@@ -20,6 +20,7 @@ if "bpy" in locals():
         # 'preferences_properties',
         # 'custom_properties',
         # 'preset_properties',
+        
         'physika_properties'
         'object_properties',
         # 'material_properties',

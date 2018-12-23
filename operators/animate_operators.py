@@ -10,9 +10,10 @@ class AnimatePhysika(bpy.types.Operator):
 
     def execute(self, context):
         """ 10 need to be changed to num_frames"""
-        for frame_id in range(10):
-            print(frame_id)
-            #load_mesh.import_frame_mesh(frame_id)
+        # for frame_id in range(10):
+        #     print(frame_id)
+        mesh_loader = load_mesh.MeshLoader();
+        mesh_loader.import_frame_mesh(0)
 
         return {"FINISHED"}
 
