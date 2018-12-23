@@ -2,14 +2,14 @@ import bpy
 import os
 
 class MeshLoader(object):
-# class PhysikaMeshCache(bpy.types.PropertyGroup):
-    # @classmethod
-    # def register(cls):
-    #     pass
+# class MeshLoader(bpy.types.PropertyGroup):
+    @classmethod
+    def register(cls):
+        pass
 
-    # @classmethod
-    # def unregister(cls):
-    #     pass
+    @classmethod
+    def unregister(cls):
+        pass
 
 
     def get_mesh_filepath(self, frame_id):
@@ -46,8 +46,18 @@ class MeshLoader(object):
         new_mesh_data_name = 'frame' + str(frame_id)
         new_mesh_data = bpy.data.meshes.new(new_mesh_data_name)
         new_mesh_data.from_pydata(vertexs, [], triangles)
+
+        cache_object = self.get_physika_object()
+        
         
 
+    def get_physika_object(self):
+        for obj in bpy.data.objects:
+            print(obj.name, " is : ", obj.physika.is_active)
+
+                
+            
+        
 # def register():
 #     bpy.utils.register_class(PhysikaMeshCache)
 

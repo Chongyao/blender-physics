@@ -55,7 +55,7 @@ class PhysiKaObjectProperties(bpy.types.PropertyGroup):
     def update_object_type(context):
         pass
         
-def registerp():
+def register():
     bake_properties.register()
     bpy.utils.register_class(PhysiKaObjectProperties)
     
