@@ -1,0 +1,27 @@
+{
+  "info":{
+    "Indir":"DEMO/INPUT/",
+    "Outdir":"DEMO/OUTPUT/",
+    "mesh":"beam.vtk"
+  },
+  
+  "material":{
+    "Young":1e5,
+    "Poisson":0.45,
+    "Desinity":0.5,
+    "gravity":1
+  },
+  
+  "constrant":{
+    "Position":"beam-fixed-01.csv",
+    "Force":"beam-force.csv",
+    "wpos":1e6
+  },
+  "method":{
+    "Maxits":20,
+    "Dynamics":false,
+    "timestep":0.01,
+    "frames":1
+
+  }
+}
