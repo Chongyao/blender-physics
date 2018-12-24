@@ -1,5 +1,5 @@
 import bpy,os
-
+import bmesh
 from .. import bake
 
 class BakePhysiKaSimulation(bpy.types.Operator):
@@ -8,6 +8,19 @@ class BakePhysiKaSimulation(bpy.types.Operator):
     bl_description = "Run fluid simulation"
     bl_options = {'REGISTER'}
 
+
+
+    def triangulate_object(self, obj):
+        me = obj.data
+        # Get a BMesh representation
+        bm = bmesh.new()
+        bm.from_mesh(me)
+
+        bmesh.ops.triangulate(bm, faces=bm.faces[:], quad_method=0, ngon_method=0)
+
+        # Finish up, write the bmesh back to the mesh
+        bm.to_mesh(me)
+        bm.free()
 
     def export_model(self):
         script_path = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
@@ -25,6 +38,7 @@ class BakePhysiKaSimulation(bpy.types.Operator):
     def execute(self, context):
         print(os.path.realpath(__file__))
         obj = context.scene.objects.active
+        self.triangulate_object(obj)
         if obj.physika.is_active is True:
             self.run_simulation(obj)
         return {'RUNNING_MODAL'}
