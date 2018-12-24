@@ -58,11 +58,11 @@ class MeshLoader(object):
         cache_object.data.vertices.foreach_set('co', vertexs_new)
         cache_object.data.update()
 
-        """transform"""xo
+        """transform"""
         cache_object.data.transform(mathutils.Matrix.Identity(4))        
         cache_object.matrix_world = mathutils.Matrix.Identity(4)
-        print("here", cache_object.location)
-        
+        return cache_object
+    
     def get_physika_object(self):
         for obj in bpy.data.objects:
             if obj.physika.is_active == True:
