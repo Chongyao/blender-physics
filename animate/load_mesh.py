@@ -58,7 +58,7 @@ class MeshLoader(object):
         cache_object.data.vertices.foreach_set('co', vertexs_new)
         cache_object.data.update()
 
-        """transform"""
+        """transform"""xo
         cache_object.data.transform(mathutils.Matrix.Identity(4))        
         cache_object.matrix_world = mathutils.Matrix.Identity(4)
         print("here", cache_object.location)
