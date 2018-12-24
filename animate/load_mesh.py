@@ -1,5 +1,5 @@
 import bpy
-import os
+import os,mathutils
 
 class MeshLoader(object):
 # class MeshLoader(bpy.types.PropertyGroup):
@@ -30,7 +30,9 @@ class MeshLoader(object):
                 vertexs.append(tuple(map(float, line.replace('v','').replace('\n','').split())))
             elif line[0] is 'f':
                 triangles.append(tuple(map(int, line.replace('f','').replace('\n','').split())))
+                
         print(vertexs)
+        print(triangles)
         return vertexs, triangles
     
     def import_frame_mesh(self, frame_id):
@@ -43,21 +45,61 @@ class MeshLoader(object):
         
         vertexs, triangles = self.import_function(file_path)
 
+        """NEW METHOD"""
+        # vertexs_new = []
+        # for v in vertexs:
+        #     for coor in v:
+        #         vertexs_new.append(coor)
+        # cache_object = self.get_physika_object()
+        #  cache_object.data.vertices.foreach_set('co', vertexs_new)
+        # cache_object.data.update()
+
+
+
+        triangles_new =[]
+        for tri in triangles:
+            triangles_new.append((tri[0]-1, tri[1]-1,tri[2]-1))
+        print(triangles_new)
+        
+        """OLD METHOD"""
         new_mesh_data_name = 'frame' + str(frame_id)
         new_mesh_data = bpy.data.meshes.new(new_mesh_data_name)
-        new_mesh_data.from_pydata(vertexs, [], triangles)
+        
+        new_mesh_data.from_pydata(vertexs, [], triangles_new)
+        print("validate: ", new_mesh_data.validate())
 
         cache_object = self.get_physika_object()
-        old_mesh_data = cache_object.data
+        print("rawdata:")
+        for v in cache_object.data.vertices:
+            print(v.co)
 
-        cache_object.data = new_mesh_data
-        old_mesh_data.user_clear()
-        bpy.data.meshes.remove(old_mesh_data)        
+        for poly in cache_object.data.polygons:
+            for loop_index in range(poly.loop_start,poly.loop_start + poly.loop_total):
+                print(cache_object.data.loops[loop_index].vertex_index)
+            print(" ")
 
-        print("here")
+        print("new mesh data::")
+        for v in new_mesh_data.vertices:
+            print(v.co)
+
+        for poly in new_mesh_data.polygons:
+            for loop_index in range(poly.loop_start,poly.loop_start + poly.loop_total):
+                print(new_mesh_data.loops[loop_index].vertex_index)
+            print(" ")        
         
-        """transform"""
+        old_mesh_data = cache_object.data
+        cache_object.data = new_mesh_data
 
+        
+        old_mesh_data.user_clear()
+        bpy.data.meshes.remove(old_mesh_data)
+
+        """transform"""
+        #cache_object.scale = (1,1,1)
+        cache_object.data.transform(mathutils.Matrix.Identity(4))        
+        cache_object.matrix_world = mathutils.Matrix.Identity(4)
+        print("here", cache_object.location)
+        
     def get_physika_object(self):
         for obj in bpy.data.objects:
             if obj.physika.is_active == True:

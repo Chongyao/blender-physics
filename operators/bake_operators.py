@@ -12,7 +12,7 @@ class BakePhysiKaSimulation(bpy.types.Operator):
     def export_model(self):
         script_path = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
         export_path = os.path.join(script_path, 'lib', 'simple-translation','input','input.obj')
-        bpy.ops.export_scene.obj(filepath = export_path, use_materials=False, use_triangles=True, use_normals=False, use_uvs=False)
+        bpy.ops.export_scene.obj(filepath = export_path, axis_forward='Y', axis_up='Z',use_materials=False, use_triangles=True, use_normals=False, use_uvs=False)
         
     def run_simulation(self, obj):
         self.export_model();
