@@ -32,14 +32,16 @@ class PhysiKaProperties(bpy.types.PropertyGroup):
                 )
 
         # cls.custom_icons = bpy.utils.previews.new()
-        cls.domain_object_name = StringProperty(default="")
+        cls.physika_object_name = StringProperty(default="")
         
 
     @classmethod
     def unregister(cls):
         del bpy.types.Scene.physika
-
-
+        
+    def get_physika_object(self):
+        obj = bpy.data.objects.get(self.physika_object_name)
+        return obj
 
 
 def scene_update_post(scene):

@@ -26,6 +26,7 @@ class PhysiKaAdd(bpy.types.Operator):
     def execute(self, context):
         obj = context.scene.objects.active
         obj.physika.is_active = True
+        context.scene.physika.physika_object_name = obj.name
         return {'FINISHED'}
 
 
@@ -39,6 +40,7 @@ class PhysiKaRemove(bpy.types.Operator):
         obj = context.scene.objects.active
         obj.physika.object_type = 'TYPE_NONE'
         obj.physika.is_active = False
+        context.scene.physika.physika_object_name = ''
         return {'FINISHED'}
 
 

@@ -1,7 +1,8 @@
 if "bpy" in locals():
     import importlib
     reloadable_modules = [
-        'simulate_ui'
+        'constraint_ui',
+        'simulate_ui',
         'animate_ui'
     ]
     for module_name in reloadable_modules:
@@ -11,6 +12,7 @@ if "bpy" in locals():
 import bpy
 
 from . import(
+    constraint_ui,
     simulate_ui,
     animate_ui
 )
@@ -42,11 +44,13 @@ def append_to_PHYSICS_PT_add_panel(self, context):
 
 
 def register():
+    constraint_ui.register()
     simulate_ui.register()
     animate_ui.register()
     bpy.types.PHYSICS_PT_add.append(append_to_PHYSICS_PT_add_panel)
 
 def unregister():
+    constraint_ui.unregister()
     simulate_ui.unregister()
     animate_ui.unregister()
     bpy.types.PHYSICS_PT_add.remove(append_to_PHYSICS_PT_add_panel)

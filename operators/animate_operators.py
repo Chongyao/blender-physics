@@ -4,6 +4,7 @@ import bpy,os
 import addon_utils
 #addon_utils.enable("")
 
+
 from ..animate import load_mesh
 
 class AnimatePhysika(bpy.types.Operator):

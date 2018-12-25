@@ -17,17 +17,10 @@
 if "bpy" in locals():
     import importlib
     reloadable_modules = [
-        'error_operators',
-        'preferences_operators',
         'object_operators',
         'animate_operators',
-        'cache_operators',
-        'export_operators',
-        'material_operators',
-        'preset_operators',
         'bake_operators',
-        'draw_operators',
-        'helper_operators'
+        'constraint_operators'
     ]
     for module_name in reloadable_modules:
         if module_name in locals():
@@ -36,43 +29,22 @@ if "bpy" in locals():
 import bpy
 
 from . import (
-        # error_operators,
-        # preferences_operators,
-        object_operators,
-        animate_operators,
-        # cache_operators,
-        # export_operators,
-        # material_operators,
-        # preset_operators,
-        bake_operators,
-        # draw_operators,
-        # helper_operators
-        )
+    object_operators,
+    animate_operators,
+    bake_operators,
+    constraint_operators
+    
+)
 
 
 def register():
-    # error_operators.register()
-    # preferences_operators.register()
     object_operators.register()
     animate_operators.register()
-    # cache_operators.register()
-    # export_operators.register()
-    # material_operators.register()
-    # preset_operators.register()
     bake_operators.register()
-    # draw_operators.register()
-    # helper_operators.register()
-
+    constraint_operators.register()
 
 def unregister():
-    # error_operators.unregister()
-    # preferences_operators.unregister()
     object_operators.unregister()
     animate_operators.unregister()
-    # cache_operators.unregister()
-    # export_operators.unregister()
-    # material_operators.unregister()
-    # preset_operators.unregister()
     bake_operators.unregister()
-    # draw_operators.unregister()
-    # helper_operators.unregister()
+    constraint_operators.unregister()

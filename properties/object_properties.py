@@ -42,6 +42,7 @@ class PhysiKaObjectProperties(bpy.types.PropertyGroup):
             description = '',
             type = bake_properties.PyhsikaBakeProperties   
         )
+        cls.enable_constraint = BoolProperty(default = False)
     @classmethod    
     def unregister(cls):
         del bpy.types.Object.physika

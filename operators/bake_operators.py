@@ -32,7 +32,8 @@ class BakePhysiKaSimulation(bpy.types.Operator):
         res = bake.bake()
         if res is 0:
             obj.physika.bake.is_bake_finished = True
-            
+
+    
     
     
     def execute(self, context):
