@@ -32,19 +32,23 @@ if "bpy" in locals():
 import bpy
 
 from . import(
+    states,
     ui,
     properties,
     operators
 )
 
 def register():
+
     properties.register()
     operators.register()
     ui.register()
-    
+    states.register()
     
 
 def unregister():
+    
     properties.unregister()
     operators.unregister()
     ui.unregister()
+    states.unregister()

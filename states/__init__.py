@@ -17,11 +17,7 @@
 if "bpy" in locals():
     import importlib
     reloadable_modules = [
-        'object_operators',
-        'animate_operators',
-        'bake_operators',
-        'constraint_operators',
-        'state_properties'
+        'simulate_state',
     ]
     for module_name in reloadable_modules:
         if module_name in locals():
@@ -30,26 +26,14 @@ if "bpy" in locals():
 import bpy
 
 from . import (
-    object_operators,
-    animate_operators,
-    bake_operators,
-    constraint_operators,
-    state_properties
-    
+    simulate_state
 )
 
 
 def register():
-    state_properties.register()
-    object_operators.register()
-    animate_operators.register()
-    bake_operators.register()
-    constraint_operators.register()
+    simulate_state.register()
+
     
 
 def unregister():
-    state_properties.unregister()
-    object_operators.unregister()
-    animate_operators.unregister()
-    bake_operators.unregister()
-    constraint_operators.unregister()
+    simulate_state.unregister()
