@@ -27,15 +27,15 @@ class PhysiKaObjectProperties(bpy.types.PropertyGroup):
             type=cls
         )
         """DO NOT KNOW WHAT THIS IS FOR"""
-        cls.object_type = EnumProperty(
-                name="Type",
-                description="Type of participation in the FLIP fluid simulation",
-                items=types.object_types,
-                default='TYPE_NONE',
-                get=lambda self: self._get_object_type(),
-                set=lambda self, value: self._set_object_type(value),
-                update=lambda self, context: self._update_object_type(context),
-        )
+        # cls.object_type = EnumProperty(
+        #         name="Type",
+        #         description="Type of participation in the FLIP fluid simulation",
+        #         items=types.object_types,
+        #         default='TYPE_NONE',
+        #         get=lambda self: self._get_object_type(),
+        #         set=lambda self, value: self._set_object_type(value),
+        #         update=lambda self, context: self._update_object_type(context),
+        # )
         cls.is_active = BoolProperty(default=False)
         cls.bake = PointerProperty(
             name = 'Physika Bake Properties',
@@ -47,14 +47,6 @@ class PhysiKaObjectProperties(bpy.types.PropertyGroup):
     def unregister(cls):
         del bpy.types.Object.physika
 
-    def get_object_type():
-        return self.object_type
-    
-    def set_object_type(value):
-        pass
-
-    def update_object_type(context):
-        pass
 
         
 def register():

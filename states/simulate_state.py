@@ -23,13 +23,15 @@ class physika_simulate_op_next(physika_base_op_next):
     bl_idname = 'physika_simulate_op.next'
 
 def register_state():
-    state = bpy.context.scene.physika_state_graph.add()
+    state = bpy.data.scenes['Scene'].physika_state_graph.add()
     state.curr = 'simulate'
     state.next = 'export'
     state.prev = 'parameter'
 
+    
 def register():
-    register_state()
+    # register_state()
+    
     bpy.utils.register_class(physika_simulate_op_previous)
     bpy.utils.register_class(physika_simulate_op_next)
     bpy.utils.register_class(physika_simulate_ui)

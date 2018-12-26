@@ -24,6 +24,10 @@ class PhysiKaAdd(bpy.types.Operator):
     bl_options = {'REGISTER'}
 
     def execute(self, context):
+        
+        from ..states import simulate_state
+        simulate_state.register_state()
+        
         obj = context.scene.objects.active
         obj.physika.is_active = True
         context.scene.physika.physika_object_name = obj.name
@@ -38,9 +42,11 @@ class PhysiKaRemove(bpy.types.Operator):
 
     def execute(self, context):
         obj = context.scene.objects.active
-        obj.physika.object_type = 'TYPE_NONE'
+        # obj.physika.object_type = 'TYPE_NONE'
         obj.physika.is_active = False
         context.scene.physika.physika_object_name = ''
+
+        context.scene.physika_state_graph.clear()
         return {'FINISHED'}
 
 

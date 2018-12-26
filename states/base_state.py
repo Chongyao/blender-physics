@@ -13,7 +13,7 @@ class physika_base_ui(bpy.types.Panel):
     @classmethod
     def poll(cls, context):
         obj_props = context.scene.objects.active.physika
-        return obj_props.is_active and context.scene.physika_state == self.physika_state
+        return obj_props.is_active and context.scene.physika_state.state == cls.physika_state
     
     def draw(self, context):
         box = self.layout.box()
@@ -40,7 +40,7 @@ class physika_base_op_next(bpy.types.Operator):
     @classmethod
     def poll(cls,context):
         obj_props = context.scene.objects.active.physika
-        return obj_props.is_active and context.scene.physika_state == self.physika_state
+        return obj_props.is_active and context.scene.physika_state.state == cls.physika_state
     
     def get_next(self,context):
         for state in context.scene.physika_state_graph:
@@ -48,7 +48,7 @@ class physika_base_op_next(bpy.types.Operator):
                 return state.next
             
     def execute(self, context):
-        context.scene.physika_state = self.get_next(context)
+        context.scene.physika_state.state = self.get_next(context)
         return {'FINISHED'}
 
 class physika_base_op_previous(bpy.types.Operator):
@@ -60,7 +60,7 @@ class physika_base_op_previous(bpy.types.Operator):
     @classmethod
     def poll(cls,context):
         obj_props = context.scene.objects.active.physika
-        return obj_props.is_active and context.scene.physika_state == self.physika_state
+        return obj_props.is_active and context.scene.physika_state.state == cls.physika_state
 
     def get_previous(self, context):
         for state in context.scene.physika_state_graph:
@@ -68,7 +68,7 @@ class physika_base_op_previous(bpy.types.Operator):
                 return state.prev
     
     def execute(self, context):
-        context.scene.physika_state = self.get_previous(context)        
+        context.scene.physika_state.state = self.get_previous(context)        
         return {'FINISHED'}
     
 # def register():

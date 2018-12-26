@@ -1,12 +1,17 @@
 import bpy
 from bpy.props import(
     StringProperty,
-    CollectionProperty
+    CollectionProperty,
+    PointerProperty
 )
 class physika_state_properties(bpy.types.PropertyGroup):
     @classmethod
     def register(cls):
-        bpy.types.Scene.physika_state = StringProperty(defalut = "None")
+        bpy.types.Scene.physika_state = PointerProperty(
+            name = "physika_state",
+            type = cls
+        )
+        cls.state = StringProperty(default = "None")
 
     @classmethod 
     def unregister(cls):
@@ -14,9 +19,14 @@ class physika_state_properties(bpy.types.PropertyGroup):
 
 
 class physika_base_state_properties(bpy.types.PropertyGroup):
-    curr = StringProperty(defalut = "None")
-    next = StringProperty(default = "None")
-    prev = StringProperty(default = "None")
+    @classmethod
+    def register(cls):
+        cls.curr = StringProperty(defalut = "None")
+        cls.next = StringProperty(default = "None")
+        cls.prev = StringProperty(default = "None")
+    @classmethod
+    def register(cls):
+        pass
 
 class physika_state_graph(bpy.types.PropertyGroup):
     @classmethod

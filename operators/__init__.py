@@ -21,7 +21,7 @@ if "bpy" in locals():
         'animate_operators',
         'bake_operators',
         'constraint_operators',
-        'state_properties'
+
     ]
     for module_name in reloadable_modules:
         if module_name in locals():
@@ -34,13 +34,11 @@ from . import (
     animate_operators,
     bake_operators,
     constraint_operators,
-    state_properties
     
 )
 
 
 def register():
-    state_properties.register()
     object_operators.register()
     animate_operators.register()
     bake_operators.register()
@@ -48,7 +46,6 @@ def register():
     
 
 def unregister():
-    state_properties.unregister()
     object_operators.unregister()
     animate_operators.unregister()
     bake_operators.unregister()

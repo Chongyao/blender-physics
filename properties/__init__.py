@@ -20,8 +20,8 @@ if "bpy" in locals():
         # 'preferences_properties',
         # 'custom_properties',
         # 'preset_properties',
-        
-        'physika_properties'
+        'state_properties',
+        'physika_properties',
         'object_properties',
         # 'material_properties',
         # 'helper_properties'
@@ -34,7 +34,8 @@ import bpy
 
 from . import (
     object_properties,
-    physika_properties
+    physika_properties,
+    state_properties
     )
 
 
@@ -43,31 +44,12 @@ def scene_update_post(scene):
     physika_properties.scene_update_post(scene)
 
 
-# def frame_change_pre(scene):
-    # object_properties.frame_change_pre(scene)
-
-
-# def load_pre():
-#     object_properties.load_pre()
-
-
-# def load_post():
-    # preferences_properties.load_post()
-    # object_properties.load_post()
-
-
-# def save_pre():
-#     object_properties.save_pre()
-
-
-# def save_post():
-#     object_properties.save_post()
-
 
 def register():
     # preferences_properties.register()
     # custom_properties.register()
     # preset_properties.register()
+    state_properties.register()
     physika_properties.register()
     object_properties.register()
     # material_properties.register()
@@ -78,6 +60,7 @@ def unregister():
     # preferences_properties.unregister()
     # custom_properties.unregister()
     # preset_properties.unregister()
+    state_properties.unregister()
     physika_properties.unregister()
     object_properties.unregister()
     # material_properties.unregister()
