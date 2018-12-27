@@ -11,27 +11,20 @@ class physika_state_properties(bpy.types.PropertyGroup):
             name = "physika_state",
             type = cls
         )
-        cls.state = StringProperty(default = "None")
-
+        cls.state = StringProperty(default = 'simulate')
+        
     @classmethod 
     def unregister(cls):
         del bpy.types.Scene.physika_state
 
 
 class physika_base_state_properties(bpy.types.PropertyGroup):
-    # curr = StringProperty(defalut = "None")
-    # next = StringProperty(default = "None")
-    # prev = StringProperty(default = "None")
+
+    curr = StringProperty()
+    next = StringProperty()
+    prev = StringProperty()
     
-    @classmethod
-    def register(cls):
-        
-        cls.curr = StringProperty(defalut = "None")
-        cls.next = StringProperty(default = "None")
-        cls.prev = StringProperty(default = "None")
-    @classmethod
-    def unregister(cls):
-        pass
+
 
 class physika_state_graph(bpy.types.PropertyGroup):
     @classmethod
@@ -43,12 +36,16 @@ class physika_state_graph(bpy.types.PropertyGroup):
         pass
         # del bpy.types.Scene.physika_state_graph
 
+
+    
 def register():
     bpy.utils.register_class(physika_base_state_properties)
     bpy.utils.register_class(physika_state_graph)
     bpy.utils.register_class(physika_state_properties)
 
 def unregister():
+    # del bpy.types.Scene.physika_state_graph
     bpy.utils.unregister_class(physika_base_state_properties)
     bpy.utils.unregister_class(physika_state_graph)
     bpy.utils.unregister_class(physika_state_properties)
+

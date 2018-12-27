@@ -14,7 +14,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import bpy
+import bpy,importlib.util,os,types,sys
 
 
 class PhysiKaAdd(bpy.types.Operator):
@@ -23,14 +23,22 @@ class PhysiKaAdd(bpy.types.Operator):
     bl_description = "Add active object as PhysiKa"
     bl_options = {'REGISTER'}
 
+    def init_state_graph(self, constext):
+        script_path = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+        sys.path.append(script_path + '/states')
+        state_names = [f.split('.')[0] for f in os.listdir(script_path + '/states') if f.endswith('_state') or f.endswith('state.py')]
+        for state in state_names:
+            exec('from ..states import ' + state)
+            exec(state + '.register_state()')
+
+        
     def execute(self, context):
-        
-        from ..states import simulate_state
-        simulate_state.register_state()
-        
+
         obj = context.scene.objects.active
         obj.physika.is_active = True
         context.scene.physika.physika_object_name = obj.name
+
+        self.init_state_graph(context)
         return {'FINISHED'}
 
 
@@ -39,14 +47,16 @@ class PhysiKaRemove(bpy.types.Operator):
     bl_label = "Remove PhysiKa object"
     bl_description = "Remove PhysiKa settings from Object"
     bl_options = {'REGISTER'}
-
+    
+    def uninit_state_graph(self, context):
+        context.scene.physika_state_graph.clear()
+        
     def execute(self, context):
         obj = context.scene.objects.active
         # obj.physika.object_type = 'TYPE_NONE'
         obj.physika.is_active = False
         context.scene.physika.physika_object_name = ''
-
-        context.scene.physika_state_graph.clear()
+        self.uninit_state_graph(context)
         return {'FINISHED'}
 
 
