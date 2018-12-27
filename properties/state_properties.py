@@ -20,8 +20,8 @@ class physika_state_properties(bpy.types.PropertyGroup):
 
 class physika_base_state_properties(bpy.types.PropertyGroup):
     curr = StringProperty()
-    next_state = StringProperty()
-    prev_state = StringProperty()
+    next = StringProperty()
+    prev = StringProperty()
     
 
 

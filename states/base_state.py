@@ -44,6 +44,7 @@ class physika_base_op_next(bpy.types.Operator):
     
     def get_next(self,context):
         for state in context.scene.physika_state_graph:
+            print(state)
             if state.curr == self.physika_state:
                 return state.next
             
