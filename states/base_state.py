@@ -70,6 +70,9 @@ class physika_base_op_previous(bpy.types.Operator):
     def execute(self, context):
         context.scene.physika_state.state = self.get_previous(context)        
         return {'FINISHED'}
+
+def register_state():
+    pass
     
 # def register():
 #     bpy.utils.register_class(defrive_class)

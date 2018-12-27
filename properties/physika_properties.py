@@ -22,6 +22,7 @@ from bpy.props import (
         )
 
 
+
 class PhysiKaProperties(bpy.types.PropertyGroup):
     @classmethod
     def register(cls):
@@ -50,7 +51,6 @@ def scene_update_post(scene):
 
 def register():
     bpy.utils.register_class(PhysiKaProperties)
-
 
 def unregister():
     bpy.utils.unregister_class(PhysiKaProperties)
