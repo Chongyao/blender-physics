@@ -15,7 +15,7 @@ class physika_export_properties(bpy.types.PropertyGroup):
             name = '',
             subtype='FILE_PATH'
         )
-
+        
     @classmethod
     def unregister(cls):
         pass

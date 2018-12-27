@@ -1,5 +1,5 @@
 import bpy
-from .base_state import *
+from ..base_state import *
 
 
 
@@ -27,12 +27,14 @@ def register_state():
     state.next = 'animate'
     state.prev = 'parameter'
 
-    
+from . import (bake_operators)    
 def register():
+    bake_operators.register()
     bpy.utils.register_class(physika_simulate_op_previous)
     bpy.utils.register_class(physika_simulate_op_next)
     bpy.utils.register_class(physika_simulate_ui)
 def unregister():
+    bake_operators.unregister()
     bpy.utils.unregister_class(physika_simulate_op_previous)
     bpy.utils.unregister_class(physika_simulate_op_next)    
     bpy.utils.unregister_class(physika_simulate_ui)

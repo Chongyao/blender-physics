@@ -24,7 +24,7 @@ class physika_para(bpy.types.PropertyGroup):
         cls.physika_discrete = EnumProperty(
             name = "Setting physika discreting method",
             items = discrete_types.discrete_method,
-            # default = 'mass_spring'
+            default = 'mass_spring'
         )
         cls.common_frames = IntProperty(
             name = "num of frames",

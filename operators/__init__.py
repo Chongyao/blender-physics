@@ -32,7 +32,7 @@ import bpy
 from . import (
     object_operators,
     animate_operators,
-    bake_operators,
+    # bake_operators,
     constraint_operators,
     
 )
@@ -41,12 +41,12 @@ from . import (
 def register():
     object_operators.register()
     animate_operators.register()
-    bake_operators.register()
+    # bake_operators.register()
     constraint_operators.register()
     
 
 def unregister():
     object_operators.unregister()
     animate_operators.unregister()
-    bake_operators.unregister()
+    # bake_operators.unregister()
     constraint_operators.unregister()
