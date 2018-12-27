@@ -19,6 +19,7 @@ class physika_state_properties(bpy.types.PropertyGroup):
 
 
 class physika_base_state_properties(bpy.types.PropertyGroup):
+
     curr = StringProperty()
     next = StringProperty()
     prev = StringProperty()
@@ -29,7 +30,7 @@ class physika_state_graph(bpy.types.PropertyGroup):
     @classmethod
     def register(cls):
         bpy.types.Scene.physika_state_graph = CollectionProperty(type=physika_base_state_properties)
-
+        
     @classmethod
     def unregister(cls):
         del bpy.types.Scene.physika_state_graph
