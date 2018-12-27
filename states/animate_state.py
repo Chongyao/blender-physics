@@ -7,8 +7,7 @@ class physika_animate_ui(physika_base_ui):
     bl_label = 'Animate'
     physika_state = 'animate'
     
-    def draw(self, context):
-        super(physika_animate_ui, self).draw(context)
+    def specific_draw(self, context):
         box = self.layout.box()
 
         column = box.column(align=True)

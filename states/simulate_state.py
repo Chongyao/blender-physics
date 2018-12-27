@@ -7,8 +7,7 @@ class physika_simulate_ui(physika_base_ui):
     bl_label = "Simulate"
     physika_state = 'simulate'
     
-    def draw(self, context):
-        super(physika_simulate_ui, self).draw(context)
+    def specific_draw(self, context):
 
         column = self.layout.column()
         column.operator("physika_operators.bake_physika_simulation",

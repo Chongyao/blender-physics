@@ -11,7 +11,7 @@ class physika_state_properties(bpy.types.PropertyGroup):
             name = "physika_state",
             type = cls
         )
-        cls.state = StringProperty(default = 'simulate')
+        cls.state = StringProperty(default = 'constraint')
         
     @classmethod 
     def unregister(cls):

@@ -7,8 +7,8 @@ class physika_constraint_ui(physika_base_ui):
     bl_label = 'Constraint'
     physika_state = 'constraint'
     
-    def draw(self, context):
-        super(physika_constraint_ui, self).draw(context)
+    def specific_draw(self, context):
+        # super(physika_constraint_ui, self).draw(context)
         obj_props = context.scene.objects.active.physika
 
         box = self.layout.box()

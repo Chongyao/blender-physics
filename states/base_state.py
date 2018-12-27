@@ -24,19 +24,28 @@ class physika_base_ui(bpy.types.Panel):
         for state in context.scene.physika_state_graph:
             if state.curr == self.physika_state:
                 return state.next
-            
+    def specific_draw(self, context):
+        pass
+
+    def is_able_next(self):
+        return True
+    def is_able_prev(self):
+        return True
     def draw(self, context):
         box = self.layout.box()
         column = box.column(align = True)
         
         split = column.split(percentage = 0.5)
         column_left = split.column()
+        column_left.enabled = self.is_able_prev()
         column_right = split.column()
+        column_right.enabled = self.is_able_next()
         if(self.get_previous(context) != 'None'):
             column_left.operator('physika_' + self.bl_label + '_op.previous',text = "Previous")
         if(self.get_next(context) != 'None'):
             column_right.operator('physika_' + self.bl_label + '_op.next', text = "Next")
-
+            
+        self.specific_draw(context)
 class defrive_class(physika_base_ui):
     bl_label = "teste"
 

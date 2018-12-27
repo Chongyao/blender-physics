@@ -24,8 +24,7 @@ class physika_parameter_ui(physika_base_ui):
         for special_prop in special_props:
             box.column().prop(eval('para_props.' + discrete_method), special_prop)        
         
-    def draw(self, context):
-        super(physika_parameter_ui, self).draw(context)
+    def specific_draw(self, context):
 
         para_props = context.scene.physika_para
         
