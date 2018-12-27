@@ -19,23 +19,29 @@ class physika_state_properties(bpy.types.PropertyGroup):
 
 
 class physika_base_state_properties(bpy.types.PropertyGroup):
+    # curr = StringProperty(defalut = "None")
+    # next = StringProperty(default = "None")
+    # prev = StringProperty(default = "None")
+    
     @classmethod
     def register(cls):
+        
         cls.curr = StringProperty(defalut = "None")
         cls.next = StringProperty(default = "None")
         cls.prev = StringProperty(default = "None")
     @classmethod
-    def register(cls):
+    def unregister(cls):
         pass
 
 class physika_state_graph(bpy.types.PropertyGroup):
     @classmethod
     def register(cls):
-        bpy.types.Scene.physika_state_graph = CollectionProperty(type=physika_base_state_properties)
-
+        # bpy.types.Scene.physika_state_graph = CollectionProperty(type=physika_base_state_properties)
+        pass
     @classmethod
     def unregister(cls):
-        del bpy.types.Scene.physika_state_graph
+        pass
+        # del bpy.types.Scene.physika_state_graph
 
 def register():
     bpy.utils.register_class(physika_base_state_properties)
