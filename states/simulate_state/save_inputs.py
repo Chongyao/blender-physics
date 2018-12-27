@@ -19,11 +19,15 @@ def save_constraint(context, discrete_method, input_path):
     raw_path = os.getcwd()
     os.chdir(input_path)
     file_path = os.path.join('./', obj.name+'.csv')
+    for group in obj.vertex_groups:
+        if group.name == 'PhysikaConstraint':
+            vg_idx = group.index
+            
     vs = [ v for v in obj.data.vertices if vg_idx in [ vg.group for vg in v.groups ] ]
     with open(file_path,'w') as f:
-        f.write("vtkOriginalPointIds","Points:0","Points:1","Points:2\n")
+        f.write('"vtkOriginalPointIds","Points:0","Points:1","Points:2"\n')
         for v in vs:
-            f.write(v.index,',',v.co[0],',',v.co[1],',',v.co[2],'\n')
+            f.write(str(v.index) + ',' + str(v.co[0]) +','+str(v.co[1]) + ',' + str(v.co[2]) + '\n')
     
     os.chdir(raw_path)
 
