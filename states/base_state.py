@@ -66,8 +66,10 @@ class physika_base_op_next(bpy.types.Operator):
         for state in context.scene.physika_state_graph:
             if state.curr == self.physika_state:
                 return state.next
-            
+    def specific_exec(self, context):
+        pass
     def execute(self, context):
+        self.specific_exec(context)
         context.scene.physika_state.state = self.get_next(context)
         return {'FINISHED'}
 
@@ -82,12 +84,16 @@ class physika_base_op_previous(bpy.types.Operator):
         obj_props = context.scene.objects.active.physika
         return obj_props.is_active and context.scene.physika_state.state == cls.physika_state
 
+    def specific_exec(self, context):
+        pass
+    
     def get_previous(self, context):
         for state in context.scene.physika_state_graph:
             if state.curr == self.physika_state:
                 return state.prev
     
     def execute(self, context):
+        self.specific_exec(context)
         context.scene.physika_state.state = self.get_previous(context)        
         return {'FINISHED'}
 

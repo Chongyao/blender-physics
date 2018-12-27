@@ -34,9 +34,9 @@ class BakePhysiKaSimulation(bpy.types.Operator):
         
     def run_simulation(self, obj):
         pass
-        # res = bake.bake()
-        # if res is 0:
-        #     obj.physika.bake.is_bake_finished = True
+        res = bake.bake(bpy.context.scene.physika_para.physika_discrete,obj)
+        if res is 0:
+            obj.physika.bake.is_bake_finished = True
 
     
     def execute(self, context):

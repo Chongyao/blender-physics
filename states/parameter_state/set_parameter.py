@@ -73,7 +73,8 @@ class physika_para(bpy.types.PropertyGroup):
         
     @classmethod
     def unregister(cls):
-        del bpy.types.Scene.physika_discrete
+        pass
+        # del bpy.types.Scene.physika_discrete
         
 
 
@@ -86,6 +87,9 @@ def register():
     bpy.types.Scene.physika_para = PointerProperty(type=physika_para)
 
 def unregister():
+    for enum in discrete_types.discrete_method:
+        exec('bpy.utils.unregister_class(physika_para_' + enum[1] + ')')    
+
     bpy.utils.unregister_class(physika_para)
     del bpy.types.Scene.physika_para
 

@@ -44,6 +44,8 @@ class physika_constraint_op_next(physika_base_op_next):
     physika_state = 'constraint'
     bl_idname = 'physika_constraint_op.next'
 
+    def specific_exec(self, context):
+        bpy.ops.object.mode_set(mode='OBJECT')
 def register_state():
     state = bpy.data.scenes['Scene'].physika_state_graph.add()
     state.curr = 'constraint'

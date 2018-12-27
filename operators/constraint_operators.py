@@ -37,6 +37,9 @@ class PhysiKaAddConstraint(bpy.types.Operator):
         obj = context.scene.physika.get_physika_object()
         vertex_group = obj.vertex_groups.get("PhysikaConstraint")
         vertex_group.lock_weight = False
+        # vertex_index = [ v for v in obj.data.vertices if v.select ]
+        # bpy.ops.object.mode_set(mode='OBJECT')
+        # vertex_group.add(vertex_index, 1.0, "ADD")
         bpy.ops.object.vertex_group_assign()
         vertex_group.lock_weight = True        
         return {'FINISHED'}
