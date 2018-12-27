@@ -5,5 +5,5 @@ discrete_method = (
 )
 #(para_name, data_type, if exposed, (Enum))
 fem_parameter = ()
-mass_spring_parameter = ()
+mass_spring_parameter = (('stiffness', 'float', True))
 meshless_parameter = ()

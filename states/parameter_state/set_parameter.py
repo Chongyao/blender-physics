@@ -18,27 +18,39 @@ class physika_para(bpy.types.PropertyGroup):
             items = discrete_types.discrete_method,
             # default = 'mass_spring'
         )
-        cls.frames = IntProperty(
+        cls.common_frames = IntProperty(
             name = "num of frames",
             subtype = 'UNSIGNED',
             default = 50,
             step = 10
         )
-        cls.delt_t = FloatProperty(
+        cls.common_delt_t = FloatProperty(
             name = "delt_t",
             description = 'delt time between each iteraton step instead of delt time between each frame',
             min = 0.01,
             max = 0.1,
-            step = 1
+            step = 1,
+            default = 0.01
         )
         
-        cls.frame_rate = IntProperty(
+        cls.common_frame_rate = IntProperty(
             name = 'frame rate',
             description = 'num of frames per second',
             default = 10,
             subtype = "UNSIGNED",
             max = 100,
             update = lambda self, context: self._update_frame_rate(context)
+        )
+
+        cls.common_gravity = FloatProperty(
+            name = "gravity",
+            default = 9.81
+        )
+
+        cls.common_density = FloatProperty(
+            name = 'density',
+            description = ' gravity for physika simulaton, blender build-in gravity will not work',
+            min = 0,
         )
 
         def _update_frame_rate(self, context):
