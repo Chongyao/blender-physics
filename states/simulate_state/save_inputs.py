@@ -16,9 +16,16 @@ def save_model(context, discrete_method, input_path):
 
 def save_constraint(context, discrete_method, input_path):
     obj = context.scene.objects.active
-    file_path = os.path.join(input_path, obj.name+'.csv')
+    raw_path = os.getcwd()
+    os.chdir(input_path)
+    file_path = os.path.join('./', obj.name+'.csv')
+    vs = [ v for v in obj.data.vertices if vg_idx in [ vg.group for vg in v.groups ] ]
+    with open(file_path,'w') as f:
+        f.write("vtkOriginalPointIds","Points:0","Points:1","Points:2\n")
+        for v in vs:
+            f.write(v.index,',',v.co[0],',',v.co[1],',',v.co[2],'\n')
     
-    
+    os.chdir(raw_path)
 
 def save_parameters(context, discrete_method, input_path):
     raw_path = os.getcwd()
