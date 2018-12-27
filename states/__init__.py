@@ -20,7 +20,8 @@ if "bpy" in locals():
         'constraint_state',
         'animate_state',
         'simulate_state',
-        'parameter_state'
+        'parameter_state',
+        'export_state'
     ]
     for module_name in reloadable_modules:
         if module_name in locals():
@@ -32,7 +33,8 @@ from . import (
     simulate_state,
     constraint_state,
     animate_state,
-    parameter_state
+    parameter_state,
+    export_state
 )
 
 
@@ -41,9 +43,11 @@ def register():
     simulate_state.register()
     animate_state.register()
     parameter_state.register()
+    export_state.register()
 
 def unregister():
     constraint_state.unregister()
     simulate_state.unregister()
     animate_state.unregister()
     parameter_state.unregister()
+    export_state_unregister()

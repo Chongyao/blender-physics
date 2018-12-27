@@ -24,30 +24,12 @@ class PhysiKaAdd(bpy.types.Operator):
     bl_options = {'REGISTER'}
 
     def init_state_graph(self, constext):
-
-        # script_path = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
-        # sys.path.append(script_path + '/states')
-        # state_names = [f.split('.')[0] for f in os.listdir(script_path + '/states') if f.endswith('_state.py')]
-        # print(state_names)
-        # for state in state_names:
-        #     importlib.import_module(state)
-        
-        #     state_path = script_path + '/states/' + state + '.py'
-        #     print(state_path)
-        #     loader = importlib.machinery.SourceFileLoader(state, state_path)
-        #     mod = types.ModuleType(loader.name)
-        #     loader.exec_module(mod)
-        #     mod.register_state()
-        """TODO auto import"""
-        from ..states import (simulate_state,
-                              constraint_state,
-                              animate_state,
-                              parameter_state)
-        simulate_state.register_state()
-        constraint_state.register_state()
-        animate_state.register_state()
-        parameter_state.register_state()
-        
+        script_path = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+        sys.path.append(script_path + '/states')
+        state_names = [f.split('.')[0] for f in os.listdir(script_path + '/states') if f.endswith('_state') or f.endswith('state.py')]
+        for state in state_names:
+            exec('from ..states import ' + state)
+            exec(state + '.register_state()')
 
         
     def execute(self, context):

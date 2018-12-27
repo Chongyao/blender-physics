@@ -3,7 +3,7 @@ from ..base_state import *
 from . import discrete_types
 
 class physika_parameter_ui(physika_base_ui):
-    bl_label = 'parameter'
+    bl_label = 'Parameter'
     physika_state = 'parameter'
 
     def valid_common_props(self, string):

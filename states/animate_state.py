@@ -27,7 +27,7 @@ class physika_animate_op_next(physika_base_op_next):
 def register_state():
     state = bpy.data.scenes['Scene'].physika_state_graph.add()
     state.curr = 'animate'
-    state.next = 'None'
+    state.next = 'export'
     state.prev = 'simulate'
 
     
