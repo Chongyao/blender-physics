@@ -50,13 +50,13 @@ def register():
     # base_ui.register()
     # constraint_ui.register()
     # simulate_ui.register()
-    animate_ui.register()
+    # animate_ui.register()
     bpy.types.PHYSICS_PT_add.append(append_to_PHYSICS_PT_add_panel)
 
 def unregister():
     # base_ui.unregister()
     # constraint_ui.unregister()
     # simulate_ui.unregister()
-    animate_ui.unregister()
+    # animate_ui.unregister()
     bpy.types.PHYSICS_PT_add.remove(append_to_PHYSICS_PT_add_panel)
 

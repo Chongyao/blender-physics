@@ -27,16 +27,18 @@ import bpy
 
 from . import (
     simulate_state,
-    constraint_state
+    constraint_state,
+    animate_state
 )
 
 
 def register():
     constraint_state.register()
     simulate_state.register()
-
+    animate_state.register()
     
 
 def unregister():
     constraint_state.unregister()
     simulate_state.unregister()
+    animate_state.unregister()
