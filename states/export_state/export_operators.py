@@ -1,11 +1,13 @@
-import bpy
+import bpy,zipfile
 class physika_export_operator(bpy.types.Operator):
     bl_idname = "physika_operators.export_result"
     bl_label = "Export Results"
     bl_options = {'REGISTER'}
 
     def execute(self, context):
-        pass
+        path = context.scene.physika_export.export_path
+        obj = context.object
+
 
 
 def register():

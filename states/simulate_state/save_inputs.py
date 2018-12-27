@@ -31,7 +31,7 @@ def save_constraint(context, discrete_method, input_path):
         for v in vs:
             f.write(str(v.index) + ',' + str(v.co[0]) +','+str(v.co[1]) + ',' + str(v.co[2]) + '\n')
     
-    os.chdir(raw_path)
+            os.chdir(raw_path)
 
 def save_parameters(context, discrete_method, input_path):
     raw_path = os.getcwd()
