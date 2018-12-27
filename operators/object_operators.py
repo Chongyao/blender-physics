@@ -41,10 +41,12 @@ class PhysiKaAdd(bpy.types.Operator):
         """TODO auto import"""
         from ..states import (simulate_state,
                               constraint_state,
-                              animate_state)
+                              animate_state,
+                              parameter_state)
         simulate_state.register_state()
         constraint_state.register_state()
         animate_state.register_state()
+        parameter_state.register_state()
         
 
         

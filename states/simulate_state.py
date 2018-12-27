@@ -26,14 +26,13 @@ def register_state():
     state = bpy.data.scenes['Scene'].physika_state_graph.add()
     state.curr = 'simulate'
     state.next = 'animate'
-    state.prev = 'constraint'
+    state.prev = 'parameter'
 
     
 def register():
     bpy.utils.register_class(physika_simulate_op_previous)
     bpy.utils.register_class(physika_simulate_op_next)
     bpy.utils.register_class(physika_simulate_ui)
-
 def unregister():
     bpy.utils.unregister_class(physika_simulate_op_previous)
     bpy.utils.unregister_class(physika_simulate_op_next)    

@@ -17,7 +17,10 @@
 if "bpy" in locals():
     import importlib
     reloadable_modules = [
+        'constraint_state',
+        'animate_state',
         'simulate_state',
+        'parameter_state'
     ]
     for module_name in reloadable_modules:
         if module_name in locals():
@@ -28,7 +31,8 @@ import bpy
 from . import (
     simulate_state,
     constraint_state,
-    animate_state
+    animate_state,
+    parameter_state
 )
 
 
@@ -36,9 +40,10 @@ def register():
     constraint_state.register()
     simulate_state.register()
     animate_state.register()
-    
+    parameter_state.register()
 
 def unregister():
     constraint_state.unregister()
     simulate_state.unregister()
     animate_state.unregister()
+    parameter_state.unregister()

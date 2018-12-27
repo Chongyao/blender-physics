@@ -47,7 +47,7 @@ class physika_constraint_op_next(physika_base_op_next):
 def register_state():
     state = bpy.data.scenes['Scene'].physika_state_graph.add()
     state.curr = 'constraint'
-    state.next = 'simulate'
+    state.next = 'parameter'
     state.prev = 'None'
 
     

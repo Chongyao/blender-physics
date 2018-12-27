@@ -22,14 +22,13 @@ class physika_base_ui(bpy.types.Panel):
 
     def get_next(self,context):
         for state in context.scene.physika_state_graph:
-            print(state)
             if state.curr == self.physika_state:
                 return state.next
             
     def draw(self, context):
         box = self.layout.box()
         column = box.column(align = True)
-
+        
         split = column.split(percentage = 0.5)
         column_left = split.column()
         column_right = split.column()
@@ -56,7 +55,6 @@ class physika_base_op_next(bpy.types.Operator):
     
     def get_next(self,context):
         for state in context.scene.physika_state_graph:
-            print(state)
             if state.curr == self.physika_state:
                 return state.next
             
