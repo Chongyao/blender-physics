@@ -1,7 +1,6 @@
 import bpy
 from ..base_state import *
-
-
+from . import discrete_types
 
 class physika_parameter_ui(physika_base_ui):
     bl_label = 'parameter'
@@ -13,12 +12,18 @@ class physika_parameter_ui(physika_base_ui):
     def draw_common_paras(self, context, para_props):
         self.layout.label('Common parameters:')
         box = self.layout.box()
-        print(dir(para_props))
         common_props = list(filter(self.valid_common_props, dir(para_props)))
         for common_prop in common_props:
             box.column().prop(para_props, common_prop)
         
-    
+    def draw_specific_paras(self, context, para_props):
+        discrete_method = para_props.physika_discrete
+        self.layout.label('Special parameters:')
+        box = self.layout.box()
+        special_props = [prop[0] for prop in eval('discrete_types.' + discrete_method + '_parameter')]
+        for special_prop in special_props:
+            box.column().prop(eval('para_props.' + discrete_method), special_prop)        
+        
     def draw(self, context):
         super(physika_parameter_ui, self).draw(context)
 
@@ -30,6 +35,7 @@ class physika_parameter_ui(physika_base_ui):
         row.prop(para_props, 'physika_discrete', expand = True)
 
         self.draw_common_paras(context, para_props)
+        self.draw_specific_paras(context, para_props)        
 
 class physika_parameter_op_previous(physika_base_op_previous):
     physika_state = 'parameter'

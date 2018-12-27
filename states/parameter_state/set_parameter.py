@@ -9,8 +9,16 @@ from bpy.props import (
         PointerProperty,
         StringProperty
         )
+property_adder = Property_add_subproperty()
 
+for enum in discrete_types.discrete_method:
+    class_name = 'physika_para_' + enum[1]
+    exec('class ' + class_name + '(bpy.types.PropertyGroup):pass')
+    for para in eval('discrete_types.' + enum[1] + '_parameter'):
+        exec('property_adder.add_' + para[1] + '_parameter(' + class_name + ', para[0], para[3])')
+    
 class physika_para(bpy.types.PropertyGroup):
+    
     @classmethod
     def register(cls):
         cls.physika_discrete = EnumProperty(
@@ -53,10 +61,14 @@ class physika_para(bpy.types.PropertyGroup):
             min = 0,
         )
 
-        def _update_frame_rate(self, context):
-            if self.frame_rate >  1/self.delt_t:
-                self.frame_rate = int(1/self.delt_t)
-        
+        for enum in discrete_types.discrete_method:
+            exec('cls.' + enum[1] + ' = PointerProperty(type = physika_para_' + enum[1] + ')')
+    
+
+    def _update_frame_rate(self, context):
+        if self.frame_rate >  1/self.delt_t:
+            self.frame_rate = int(1/self.delt_t)
+            
             
         
     @classmethod
@@ -64,20 +76,14 @@ class physika_para(bpy.types.PropertyGroup):
         del bpy.types.Scene.physika_discrete
         
 
-# class union_prameter():
-#     class
-def add_specific_discrete_properties():
-    for enum in discrete_types.discrete_method:
-        exec('class physika_para_' + enum[1] + '(bpy.types.PropertyGroup):pass')
-        for paras in eval('discrete_type.' + enum[1] + '_parameter'):
-            
-            pass   
-        setattr(physika_para, enum[1], PointerProperty(type=eval('physika_para_' + enum[1])))
+
+
 
 def register():
+    for enum in discrete_types.discrete_method:
+        exec('bpy.utils.register_class(physika_para_' + enum[1] + ')')
     bpy.utils.register_class(physika_para)
     bpy.types.Scene.physika_para = PointerProperty(type=physika_para)
-
 
 def unregister():
     bpy.utils.unregister_class(physika_para)
