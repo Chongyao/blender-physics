@@ -14,7 +14,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import bpy
+import bpy,importlib.util,os,types,sys
 
 
 class PhysiKaAdd(bpy.types.Operator):
@@ -25,8 +25,24 @@ class PhysiKaAdd(bpy.types.Operator):
 
     def init_state_graph(self, constext):
 
-        from ..states import simulate_state
+        # script_path = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+        # sys.path.append(script_path + '/states')
+        # state_names = [f.split('.')[0] for f in os.listdir(script_path + '/states') if f.endswith('_state.py')]
+        # print(state_names)
+        # for state in state_names:
+        #     importlib.import_module(state)
+        
+        #     state_path = script_path + '/states/' + state + '.py'
+        #     print(state_path)
+        #     loader = importlib.machinery.SourceFileLoader(state, state_path)
+        #     mod = types.ModuleType(loader.name)
+        #     loader.exec_module(mod)
+        #     mod.register_state()
+        """TODO auto import"""
+        from ..states import (simulate_state,
+                              constraint_state)
         simulate_state.register_state()
+        constraint_state.register_state()
         
 
         

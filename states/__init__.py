@@ -26,14 +26,17 @@ if "bpy" in locals():
 import bpy
 
 from . import (
-    simulate_state
+    simulate_state,
+    constraint_state
 )
 
 
 def register():
+    constraint_state.register()
     simulate_state.register()
 
     
 
 def unregister():
+    constraint_state.unregister()
     simulate_state.unregister()
