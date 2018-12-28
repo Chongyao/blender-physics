@@ -10,7 +10,7 @@
     "solver":"newton",
     "force_function":"gravity",
     "radius":0.11,
-    "intensity":100,
+    "intensity":0,
     "object_name":"cloth",
     "out_dir_simulator":"../../example/cloth/newton",
     "input_object":"../../input_data/cloth/cloth.vtk",

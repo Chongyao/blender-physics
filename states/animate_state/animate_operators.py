@@ -5,7 +5,7 @@ import addon_utils
 #addon_utils.enable("")
 
 
-from ..animate import load_mesh
+from . import load_mesh
 
 class AnimatePhysika(bpy.types.Operator):
     bl_idname = "physika_operators.animate"
@@ -22,15 +22,15 @@ class AnimatePhysika(bpy.types.Operator):
     
     def execute(self, context):
         scene = context.scene
-        mesh_loader = load_mesh.MeshLoader();
-        
+        ver_num = len(context.object.data.vertices)
+        mesh_loader = load_mesh.MeshLoader(scene.physika_para.physika_discrete, scene.obj.name, ver_num);
         obj = self.get_physika_object()
         obj.select = True
         bpy.data.window_managers["WinMan"].key_points = True
 
-        
+        frames = context.scene.physika_para.common_frames
         """ 10 need to be changed to num_frames"""
-        for frame_id in range(10):
+        for frame_id in range(frames):
             scene.frame_set(frame_id)
 
             mesh_loader.import_frame_mesh(frame_id)
