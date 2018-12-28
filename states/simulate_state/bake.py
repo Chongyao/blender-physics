@@ -27,4 +27,4 @@ def bake(discrete_method, obj):
     json_path = '../../input/input_para.json'
     sim_res = subprocess.run(['./' + discrete_method, json_path])
     os.chdir(raw_path)
-    return res.returncode and sim_res.returncode
+    return tet_res.returncode and sim_res.returncode

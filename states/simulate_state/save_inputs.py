@@ -60,6 +60,6 @@ def save_parameters(context, discrete_method, input_path):
     json_paras['input_constraint'] = '../../input/' + obj.name +'/'+obj.name + '.csv'
 
     with open(file_path, 'w') as f:
-        json.dump(json_paras, f)
+        json.dump(json_paras, f,indent = 4)
 
     os.chdir(raw_path)

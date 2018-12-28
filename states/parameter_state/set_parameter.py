@@ -59,6 +59,8 @@ class physika_para(bpy.types.PropertyGroup):
             name = 'density',
             description = ' gravity for physika simulaton, blender build-in gravity will not work',
             min = 0,
+            default = 10,
+            step = 100
         )
 
         for enum in discrete_types.discrete_method:
