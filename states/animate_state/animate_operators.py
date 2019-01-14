@@ -29,7 +29,7 @@ class AnimatePhysika(bpy.types.Operator):
         bpy.data.window_managers["WinMan"].key_points = True
 
         frames = context.scene.physika_para.common_frames
-        """ 10 need to be changed to num_frames"""
+
         for frame_id in range(frames):
             scene.frame_set(frame_id)
 
