@@ -11,12 +11,34 @@ from bpy.props import (
         )
 property_adder = Property_add_subproperty()
 
-for enum in discrete_types.discrete_method:
-    class_name = 'physika_para_' + enum[1]
+# add parameters in specific method
+# for enum in discrete_types.discrete_method:
+#     class_name = 'physika_para_' + enum[1]
+#     exec('class ' + class_name + '(bpy.types.PropertyGroup):pass')
+#     for para in eval('discrete_types.' + enum[1] + '_parameter'):
+#         exec('property_adder.add_' + para[1] + '_parameter(' + class_name + ', para[0], para[3])')
+import json
+
+with open("para_temp.json", "r") as para_temp:
+    methods = json.load(para_temp)
+for method, cates in methods:
+    physika_methods.append(method)
+    class_name = physika_ + method
     exec('class ' + class_name + '(bpy.types.PropertyGroup):pass')
-    for para in eval('discrete_types.' + enum[1] + '_parameter'):
-        exec('property_adder.add_' + para[1] + '_parameter(' + class_name + ', para[0], para[3])')
-    
+    for cate, paras in cates:
+        if para == "blender":
+            continue
+        exec('class ' + method + "_" + cate + '(bpy.types.PropertyGroup):pass')
+        for para, value in paras:
+            if type(value) == float:
+                exec('property_adder.add_float_parameter(' + method + '_' + cate + ', ' + para + ", attr_default = " + str(value) + ')')
+        print('property_adder.add_pointer(' + class_name + ', ' + cate + ', eval(' + method + '_' + cate + ')')
+        exec('property_adder.add_pointer(' + class_name + ', ' + cate + ', ' + method + '_' + cate + ')')
+        
+        
+
+        
+
 class physika_para(bpy.types.PropertyGroup):
     
     @classmethod
@@ -63,8 +85,10 @@ class physika_para(bpy.types.PropertyGroup):
             step = 100
         )
 
-        for enum in discrete_types.discrete_method:
-            exec('cls.' + enum[1] + ' = PointerProperty(type = physika_para_' + enum[1] + ')')
+        # for enum in discrete_types.discrete_method:
+        #     exec('cls.' + enum[1] + ' = PointerProperty(type = physika_para_' + enum[1] + ')')
+        for method, cates in methods:
+            exec('cls.' + method + ' = PointerProperty(type = physika_' + method + ')')
     
 
     def _update_frame_rate(self, context):
@@ -83,14 +107,17 @@ class physika_para(bpy.types.PropertyGroup):
 
 
 def register():
-    for enum in discrete_types.discrete_method:
-        exec('bpy.utils.register_class(physika_para_' + enum[1] + ')')
+    for method, cates in methods:
+        for cate,paras in cates:
+            exec('bpy.utils.register_class(' + method + '_' + cate + ')')
+        exec('bpy.utils.register_class(physika_' + method + ')')
     bpy.utils.register_class(physika_para)
     bpy.types.Scene.physika_para = PointerProperty(type=physika_para)
 def unregister():
-    for enum in discrete_types.discrete_method:
-        exec('bpy.utils.unregister_class(physika_para_' + enum[1] + ')')    
-
+    for method, cates in methods:
+        for cate,paras in cates:
+            exec('bpy.utils.unregister_class(' + method + '_' + cate + ')')
+        exec('bpy.utils.unregister_class(physika_' + method + ')')
     bpy.utils.unregister_class(physika_para)
     del bpy.types.Scene.physika_para
 
