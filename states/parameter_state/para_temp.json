@@ -1,5 +1,5 @@
 {
-  "mesh_less":{
+  "meshless":{
     "common":{
       "time_step":0.0001,
       "frame_rate":100,
@@ -27,6 +27,23 @@
       "g_pos":3.0,
       "position_weig":99999.0
     }
-  }//meshless
-
+  },
+  "mass_spring":{
+    "common":{
+      "time_step":0.0001,
+      "frame_rate":100,
+      "total_time":1000.0,
+      "density":5.0,    
+      "gravity":9.8
+    }
+  },
+  "FEM":{
+    "common":{
+      "time_step":0.0001,
+      "frame_rate":100,
+      "total_time":1000.0,
+      "density":5.0,    
+      "gravity":9.8
+    }    
+  }
 }

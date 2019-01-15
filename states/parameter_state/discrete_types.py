@@ -1,5 +1,5 @@
 discrete_method = (
-    ('fem', 'fem', 'finte element method'),
+    ('fem', 'FEM', 'finte element method'),
     ('mass_spring', 'mass_spring', 'mass spring method'),
     ('meshless', 'meshless', 'meshless method')
 )

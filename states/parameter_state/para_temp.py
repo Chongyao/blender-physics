@@ -9,7 +9,8 @@ from bpy.props import (
         )
 class Property_add_subproperty():
     def add_int_parameter(self, Property, attr, attr_default = 0, attr_min = -2**31, attr_max =2**31 - 1):
-        assert isinstance(Property, bpy.types.PropertyGroup)
+
+        # assert isinstance(Property, bpy.types.PropertyGroup)
         
         setattr(Property, attr, IntProperty(
             min = attr_min,
@@ -20,6 +21,7 @@ class Property_add_subproperty():
     def add_float_parameter(self, Property, attr, attr_default = 0, attr_min = sys.float_info.min, attr_max = sys.float_info.max):
         # print(dir(Property))
         # print(dir(bpy.types.PropertyGroup))
+
         # assert isinstance(Property, bpy.types.PropertyGroup)
         setattr(Property, attr, FloatProperty(
             min = attr_min,

@@ -1,6 +1,11 @@
 import bpy
 from ..base_state import *
 from . import discrete_types
+import json,os
+
+json_file = os.path.join(os.path.dirname(os.path.realpath(__file__)), "para_temp.json")
+with open(json_file, 'r') as para_temp:
+    methods = json.load(para_temp)
 
 class physika_parameter_ui(physika_base_ui):
     bl_label = 'Parameter'
@@ -22,7 +27,24 @@ class physika_parameter_ui(physika_base_ui):
         box = self.layout.box()
         special_props = [prop[0] for prop in eval('discrete_types.' + discrete_method + '_parameter')]
         for special_prop in special_props:
-            box.column().prop(eval('para_props.' + discrete_method), special_prop)        
+            box.column().prop(eval('para_props.' + discrete_method), special_prop)
+
+    def draw_paras(self, context, para_props):
+        method = para_props.physika_discrete
+
+        cates = methods[method]
+        print(dir(para_props))
+        for cate, paras in cates.items():
+            if cate == "blender":
+                continue
+            self.layout.label(cate)
+            print(dir(eval('para_props.' + method)))
+            box = self.layout.box()
+            for para, valye in paras.items():
+                print(dir(eval('para_props.' + method + '.' + cate)))
+                box.column.prop(eval('para_props.' + method + '.' + cate), para)
+
+
         
     def specific_draw(self, context):
 
@@ -33,8 +55,9 @@ class physika_parameter_ui(physika_base_ui):
         row = column.row(align = True)
         row.prop(para_props, 'physika_discrete', expand = True)
 
-        self.draw_common_paras(context, para_props)
-        self.draw_specific_paras(context, para_props)        
+        # self.draw_common_paras(context, para_props)
+        # self.draw_specific_paras(context, para_props)
+        self.draw_paras(context, para_props)
 
 class physika_parameter_op_previous(physika_base_op_previous):
     physika_state = 'parameter'
