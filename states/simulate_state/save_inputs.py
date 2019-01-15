@@ -11,10 +11,14 @@ def save_model(context, discrete_method, input_path):
     ext = eval('context.scene.physika_para.' + discrete_method + '.blender.input_format')
     raw_path = os.getcwd()
     os.chdir(input_path)
-    
-    file_path = os.path.join('./', obj.name + '.' + ext)
-    bpy.ops.export_mesh.ply(filepath = file_path, use_mesh_modifiers=False, use_normals=False, use_uv_coords=False, use_colors=False)
-    os.chdir(raw_path)
+
+    if(ext == 'obj'):
+        file_path = os.path.join('./', obj.name + '.obj')
+        bpy.ops.export_mesh.obj(filepath = file_path, use_mesh_modifiers=False, use_normals=False, use_uv_coords=False, use_colors=False)
+    elif(ext == 'vtk'):
+        file_path = os.path.join('./', obj.name + '.ply')
+        bpy.ops.export_mesh.ply(filepath = file_path, use_mesh_modifiers=False, use_normals=False, use_uv_coords=False, use_colors=False)        
+        os.chdir(raw_path)
 
 
 def save_constraint(context, discrete_method, input_path):
