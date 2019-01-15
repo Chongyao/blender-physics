@@ -73,8 +73,9 @@ def save_parameters(context, discrete_method, input_path):
     file_path = os.path.join('../', 'blender_physics.json' )
 
     #read json template 
-    json_temp_path = os.path.json(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'parameter_state', 'para_temp.json')
-    with open(json_temp, 'r') as json_temp_file:
+    json_temp_path = '../../../states/parameter_state/para_temp.json'
+    print(json_temp_path)
+    with open(json_temp_path, 'r') as json_temp_file:
         json_temp = json.load(json_temp_file)[discrete_method]
 
     #set parameters in json
@@ -86,7 +87,7 @@ def save_parameters(context, discrete_method, input_path):
     
     #write json        
     with open(file_path, 'w') as f:
-        f.dump(json_temp, f, indent = 4)
+        json.dump(json_temp, f, indent = 4)
 
     os.chdir(raw_path)
 
