@@ -28,13 +28,12 @@ class BakePhysiKaSimulation(bpy.types.Operator):
         
         input_path = os.path.join(script_path,'lib',discrete_method,'input')
         save_inputs.save_model(context, discrete_method, input_path)
-        save_inputs.save_constraint(context, discrete_method, input_path)
+        save_inputs.save_constraint(context, input_path)
         save_inputs.save_parameters(context, discrete_method, input_path)
 
         
-    def run_simulation(self, obj):
-        pass
-        res = bake.bake(bpy.context.scene.physika_para.physika_discrete,obj)
+    def run_simulation(self, obj, if_tetgen):
+        res = bake.bake(bpy.context.scene.physika_para.physika_discrete,obj,if_tetgen)
         if res is 0:
             obj.physika.bake.is_bake_finished = True
 
@@ -43,10 +42,10 @@ class BakePhysiKaSimulation(bpy.types.Operator):
         print(os.path.realpath(__file__))
         obj = context.scene.objects.active
         self.triangulate_object(obj)
-        self.save_input_files(context)
+        if_tetgen = self.save_input_files(context)
         
         if obj.physika.is_active is True:
-            self.run_simulation(obj)
+            self.run_simulation(obj, if_tetgen)
         return {'RUNNING_MODAL'}
     
 def register():

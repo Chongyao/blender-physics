@@ -17,9 +17,10 @@ def tetgen(discrete_method, obj_name):
     os.chdir(raw_path)
     return res
 
-def bake(discrete_method, obj):
+def bake(discrete_method, obj, if_tetgen):
     """ Wirte by this way temporarily"""
-    tet_res = tetgen(discrete_method, obj.name)
+    if(if_tetgen):
+        tet_res = tetgen(discrete_method, obj.name)
     
     raw_path = os.getcwd()
     script_path = os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
