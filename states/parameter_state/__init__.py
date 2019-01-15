@@ -11,38 +11,18 @@ class physika_parameter_ui(physika_base_ui):
     bl_label = 'Parameter'
     physika_state = 'parameter'
 
-    def valid_common_props(self, string):
-        return string.startswith('common')
-    
-    def draw_common_paras(self, context, para_props):
-        self.layout.label('Common parameters:')
-        box = self.layout.box()
-        common_props = list(filter(self.valid_common_props, dir(para_props)))
-        for common_prop in common_props:
-            box.column().prop(para_props, common_prop)
-        
-    def draw_specific_paras(self, context, para_props):
-        discrete_method = para_props.physika_discrete
-        self.layout.label('Special parameters:')
-        box = self.layout.box()
-        special_props = [prop[0] for prop in eval('discrete_types.' + discrete_method + '_parameter')]
-        for special_prop in special_props:
-            box.column().prop(eval('para_props.' + discrete_method), special_prop)
 
     def draw_paras(self, context, para_props):
         method = para_props.physika_discrete
 
         cates = methods[method]
-        print(dir(para_props))
         for cate, paras in cates.items():
             if cate == "blender":
                 continue
             self.layout.label(cate)
-            print(dir(eval('para_props.' + method)))
             box = self.layout.box()
             for para, valye in paras.items():
-                print(dir(eval('para_props.' + method + '.' + cate)))
-                box.column.prop(eval('para_props.' + method + '.' + cate), para)
+                box.column().prop(eval('para_props.' + method + '.' + cate), para)
 
 
         
