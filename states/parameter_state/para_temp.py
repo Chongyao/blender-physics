@@ -39,3 +39,10 @@ class Property_add_subproperty():
         setattr(Property, attr, PointerProperty(
             type = eval(attr_type)
         ))
+
+    def add_string_parameter(self, Property, attr, attr_default = ''):
+        setattr(Property, attr, StringProperty(
+            name = '',
+            default = attr_default
+        ))
+    

@@ -22,18 +22,21 @@ for method, cates in methods.items():
     discrete_methods.append(method)
     exec('class physika_' + method + '(bpy.types.PropertyGroup):pass')
     for cate, paras in cates.items():
-        if cate == "blender":
-            continue
         exec('class ' + method + "_" + cate + '(bpy.types.PropertyGroup):pass')
         for para, value in paras.items():
-            if type(value) == float:
-                exec('property_adder.add_float_parameter(' + method + '_' + cate + ', para, attr_default = value)')
-            elif type(value) == int:
-                exec('property_adder.add_int_parameter(' + method + '_' + cate + ', para, attr_default = value)')
-            elif type(value) == str:
-                #TODO: add enum
-                pass
-        exec('setattr(physika_' + method + ', "' + cate + '", PointerProperty(type = ' + method + '_' + cate +'))')
+            if (cate == 'blender'):
+                property_adder.add_string_parameter(eval(method + '_' + cate), para, value)
+            else:    
+                if type(value) == float:
+                    exec('property_adder.add_float_parameter(' + method + '_' + cate + ', para, attr_default = value)')
+                elif type(value) == int:
+                    exec('property_adder.add_int_parameter(' + method + '_' + cate + ', para, attr_default = value)')
+                elif type(value) == str:
+                    #TODO: add enum
+                    pass
+            exec('setattr(physika_' + method + ', "' + cate + '", PointerProperty(type = ' + method + '_' + cate +'))')
+
+
         
 types = tuple(((method, method, method) for method in discrete_methods))
 
@@ -70,16 +73,14 @@ class physika_para(bpy.types.PropertyGroup):
 def register():
     for method, cates in methods.items():
         for cate,paras in cates.items():
-            if cate != "blender":
-                exec('bpy.utils.register_class(' + method + '_' + cate + ')')
+            exec('bpy.utils.register_class(' + method + '_' + cate + ')')
         exec('bpy.utils.register_class(physika_' + method + ')')
     bpy.utils.register_class(physika_para)
     bpy.types.Scene.physika_para = PointerProperty(type=physika_para)
 def unregister():
     for method, cates in methods.items():
         for cate,paras in cates.items():
-            if cate != 'blender':
-                exec('bpy.utils.unregister_class(' + method + '_' + cate + ')')
+            exec('bpy.utils.unregister_class(' + method + '_' + cate + ')')
         exec('bpy.utils.unregister_class(physika_' + method + ')')
     bpy.utils.unregister_class(physika_para)
     del bpy.types.Scene.physika_para

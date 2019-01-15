@@ -9,7 +9,8 @@
     },
     
     "blender":{
-      "surf":"cube"
+      "surf":"",
+      "input_format":"obj"
     },
     
     "physics_para":{
