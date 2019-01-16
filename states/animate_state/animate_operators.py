@@ -33,11 +33,13 @@ class AnimatePhysika(bpy.types.Operator):
         total_time = para_props.common.total_time
         frame_rate = para_props.common.frame_rate
         frames = int(math.ceil(total_time * frame_rate))
-
+        
+        method = para_props.physika_discrete
+        ext = eval('para_props.' + method + '.blender.input_format')
         for frame_id in range(frames):
             scene.frame_set(frame_id)
-
-            mesh_loader.import_frame_mesh(frame_id)
+            
+            mesh_loader.import_frame_mesh(frame_id, ext)
             bpy.ops.anim.insert_keyframe_animall()
 
             

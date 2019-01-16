@@ -16,10 +16,10 @@ class MeshLoader(object):
         self.obj_name = obj_name
         self.ver_num = ver_num
         
-    def get_mesh_filepath(self, frame_id):
-        file_name = self.obj_name+ str(frame_id) +'.vtk'
-        file_path = os.path.join('lib', self.discrete_method, 'output')
-        return file_path + file_name
+    def get_mesh_filepath(self, frame_id, ext):
+        file_name = self.obj_name+ str(frame_id) +'.' + ext
+        file_path = os.path.join('lib', self.discrete_method, 'output', file_name)
+        return file_path
 
     """import vertices and triangles by tuple in list"""
     def import_function(self, file_path):
@@ -48,13 +48,13 @@ class MeshLoader(object):
         vertexs = list(map(float, vertexs))
         return vertexs
     
-    def import_frame_mesh(self, frame_id):
+    def import_frame_mesh(self, frame_id, ext):
         raw_path = os.getcwd()
         script_path = os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
         assert os.path.basename(script_path) == 'blender-physics', 'script_path is wrong'
         os.chdir(script_path)
 
-        file_path = self.get_mesh_filepath(frame_id)
+        file_path = self.get_mesh_filepath(frame_id, ext)
         
         vertexs_new = self.get_new_vertices_position(file_path)
 
