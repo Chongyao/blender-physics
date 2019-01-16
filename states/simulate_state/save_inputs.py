@@ -98,13 +98,19 @@ def save_parameters(context, discrete_method, input_path):
     json_temp_path = '../../../states/parameter_state/para_temp.json'
     print(json_temp_path)
     with open(json_temp_path, 'r') as json_temp_file:
-        json_temp = json.load(json_temp_file)[discrete_method]
+        temp_data = json.load(json_temp_file)
 
+    common_data = temp_data['common']
+    json_temp = temp_data[discrete_method]
+    json_temp['common'] = common_data
     #set parameters in json
-    para_props = eval('context.scene.physika_para.' + discrete_method)
+    para_props = context.scene.physika_para
     for cate, paras in json_temp.items():
         for para, value in paras.items():
-            json_temp[cate][para] = eval('para_props.' + cate + '.' + para)
+            if(cate == 'common'):
+                json_temp[cate][para] = eval('para_props.common.' + para)
+            else:
+                json_temp[cate][para] = eval('para_props.' + discrete_method + '.'+ cate + '.' + para)
     json_temp['blender']['surf'] = context.scene.physika.physika_object_name
     
     #write json        

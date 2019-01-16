@@ -1,5 +1,5 @@
 import bpy,os
-
+import math
 """TODO: enable AnimaAll"""
 import addon_utils
 #addon_utils.enable("")
@@ -23,12 +23,16 @@ class AnimatePhysika(bpy.types.Operator):
     def execute(self, context):
         scene = context.scene
         ver_num = len(context.object.data.vertices)
-        mesh_loader = load_mesh.MeshLoader(scene.physika_para.physika_discrete, scene.obj.name, ver_num);
+        obj_name = scene.physika.physika_object_name
+        mesh_loader = load_mesh.MeshLoader(scene.physika_para.physika_discrete, obj_name, ver_num);
         obj = self.get_physika_object()
         obj.select = True
         bpy.data.window_managers["WinMan"].key_points = True
 
-        frames = context.scene.physika_para.common_frames
+        para_props = context.scene.physika_para
+        total_time = para_props.common.total_time
+        frame_rate = para_props.common.frame_rate
+        frames = int(math.ceil(total_time * frame_rate))
 
         for frame_id in range(frames):
             scene.frame_set(frame_id)

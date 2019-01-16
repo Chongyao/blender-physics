@@ -18,13 +18,31 @@ discrete_methods = []
 json_file = os.path.join(os.path.dirname(os.path.realpath(__file__)), "para_temp.json")
 with open(json_file, "r") as para_temp:
     methods = json.load(para_temp)
+
+#declear common paras
+common_paras = methods['common']
+class physika_common(bpy.types.PropertyGroup):
+    pass
+for para, value in common_paras.items():
+    if type(value) == float:
+        property_adder.add_float_parameter(physika_common, para, attr_default = value)
+    elif type(value) == int:
+        property_adder.add_int_parameter(physika_common, para, attr_default = value)
+    elif type(value) == str:
+        #TODO: add enum
+        pass
+                
+
+#declear special paras
 for method, cates in methods.items():
-    discrete_methods.append(method)
+    if(method == "common"):
+        continue
+    discrete_methods.append(method)            
     exec('class physika_' + method + '(bpy.types.PropertyGroup):pass')
     for cate, paras in cates.items():
         exec('class ' + method + "_" + cate + '(bpy.types.PropertyGroup):pass')
         for para, value in paras.items():
-            if (cate == 'blender'):
+            if(cate == 'blender'):
                 property_adder.add_string_parameter(eval(method + '_' + cate), para, value)
             else:    
                 if type(value) == float:
@@ -34,7 +52,7 @@ for method, cates in methods.items():
                 elif type(value) == str:
                     #TODO: add enum
                     pass
-            exec('setattr(physika_' + method + ', "' + cate + '", PointerProperty(type = ' + method + '_' + cate +'))')
+        exec('setattr(physika_' + method + ', "' + cate + '", PointerProperty(type = ' + method + '_' + cate +'))')
 
 
         
@@ -71,14 +89,20 @@ class physika_para(bpy.types.PropertyGroup):
 
 
 def register():
+    bpy.utils.register_class(physika_common)
     for method, cates in methods.items():
+        if(method == "common"):
+            continue
         for cate,paras in cates.items():
             exec('bpy.utils.register_class(' + method + '_' + cate + ')')
         exec('bpy.utils.register_class(physika_' + method + ')')
     bpy.utils.register_class(physika_para)
     bpy.types.Scene.physika_para = PointerProperty(type=physika_para)
 def unregister():
+    bpy.utils.unregister_class(physika_common)
     for method, cates in methods.items():
+        if(method == "common"):
+            continue
         for cate,paras in cates.items():
             exec('bpy.utils.unregister_class(' + method + '_' + cate + ')')
         exec('bpy.utils.unregister_class(physika_' + method + ')')

@@ -12,6 +12,13 @@ class physika_parameter_ui(physika_base_ui):
     physika_state = 'parameter'
 
 
+    def draw_common_paras(self, context, para_props):
+        paras = methods['common']
+        self.layout.label('common')
+        box = self.layout.box()
+        for para, value in paras.items():
+            box.column().prop(para_props.common, para)
+    
     def draw_paras(self, context, para_props):
         method = para_props.physika_discrete
 
@@ -37,6 +44,7 @@ class physika_parameter_ui(physika_base_ui):
 
         # self.draw_common_paras(context, para_props)
         # self.draw_specific_paras(context, para_props)
+        self.draw_common_paras(context, para_props)
         self.draw_paras(context, para_props)
 
 class physika_parameter_op_previous(physika_base_op_previous):
