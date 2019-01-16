@@ -28,4 +28,7 @@ def bake(discrete_method, obj, if_tetgen):
     json_path = '../blender_physics.json'
     sim_res = subprocess.run(['./blender_' + discrete_method, json_path])
     os.chdir(raw_path)
-    return tet_res.returncode and sim_res.returncode
+    if(if_tetgen):
+        return tet_res.returncode and sim_res.returncode
+    else:
+        return sim_res.returncode

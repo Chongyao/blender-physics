@@ -1,9 +1,9 @@
 {
   "meshless":{
     "common":{
-      "time_step":0.0001,
-      "frame_rate":100,
-      "total_time":1000.0,
+      "time_step":0.1,
+      "frame_rate":20,
+      "total_time":1.0,
       "density":5.0,    
       "gravity":9.8
     },

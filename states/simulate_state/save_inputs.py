@@ -1,10 +1,23 @@
 import bpy
 import json,os
 from ..parameter_state import discrete_types
-
+import shutil
 def valid_common_props(string):
     return string.startswith('common')
 
+def clear_cache(context, discrete_method, input_path):
+    obj_name = context.scene.physika.physika_object_name
+    raw_path = os.getcwd()
+    os.chdir(input_path)
+
+    cache_dir = os.path.join('../', 'output', obj_name)
+    print(cache_dir)
+    if(os.path.exists(cache_dir)):
+        shutil.rmtree(cache_dir)
+        print("clear cache")
+    
+    os.chdir(raw_path)
+    
 def save_model(context, discrete_method, input_path):
     #TODO get physika object
     obj = context.scene.objects.active

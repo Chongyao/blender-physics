@@ -30,6 +30,7 @@ class BakePhysiKaSimulation(bpy.types.Operator):
         save_inputs.save_model(context, discrete_method, input_path)
         save_inputs.save_constraint(context, input_path)
         save_inputs.save_parameters(context, discrete_method, input_path)
+        save_inputs.clear_cache(context, discrete_method, input_path)
 
         
     def run_simulation(self, obj, if_tetgen):
