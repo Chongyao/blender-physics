@@ -1,27 +1,27 @@
 {
-    "simulation_para": {
-        "w_g": 10.0,
-        "w_coll": 200.0,
-        "dump": 1.0,
-        "kv": 500.0,
-        "position_weig": 99999.0,
-        "num_in_axis": 8,
-        "g_pos": 3.0,
-        "nn_num": 3
-    },
     "blender": {
-        "input_format": "obj",
-        "surf": "Cube"
+        "surf": "Cube",
+        "input_format": "obj"
     },
     "physics_para": {
-        "Young": 7000.0,
-        "Poission": 0.44999998807907104
+        "Poission": 0.44999998807907104,
+        "Young": 7000.0
+    },
+    "simulation_para": {
+        "num_in_axis": 8,
+        "kv": 500.0,
+        "nn_num": 3,
+        "w_g": 10.0,
+        "dump": 1.0,
+        "w_coll": 200.0,
+        "g_pos": 3.0,
+        "position_weig": 99999.0
     },
     "common": {
-        "gravity": 9.800000190734863,
         "time_step": 0.10000000149011612,
         "frame_rate": 20,
+        "total_time": 1.0,
         "density": 5.0,
-        "total_time": 1.0
+        "gravity": 9.800000190734863
     }
 }
