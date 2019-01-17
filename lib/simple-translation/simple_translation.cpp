@@ -47,13 +47,19 @@ int main(int argc, char** argv){
   float total_time = common.get<float>("total_time");
   float delt_t = common.get<float>("time_step");
   float gravity = common.get<float>("gravity");
+  size_t frame_rate = common.get<size_t>("frame_rate");
   size_t max_iter = static_cast<size_t>(ceil(total_time / delt_t));
+  size_t iters_per_frame = static_cast<size_t>(1.0 / delt_t / frame_rate);
   cout << "max iter is " << max_iter << endl;
   for(size_t i = 0; i < max_iter; ++i){
     nods.col(0) += VectorXd::Ones(nods.rows())*delt_t * gravity;
     
-    string res = outdir + '/' + mesh_name + to_string(i) + ".obj";
-    writeOBJ(res.c_str(), nods, surf);
+
+    if(){
+      string res = outdir + '/' + mesh_name + to_string(i) + ".obj";
+      writeOBJ(res.c_str(), nods, surf);      
+    }
+
 
   }
 

@@ -18,7 +18,7 @@ class MeshLoader(object):
         
     def get_mesh_filepath(self, frame_id, ext):
         file_name = self.obj_name+ str(frame_id) +'.' + ext
-        file_path = os.path.join('lib', self.discrete_method, 'output', file_name)
+        file_path = os.path.join('lib', self.discrete_method, 'output', self.obj_name, file_name)
         return file_path
 
     """import vertices and triangles by tuple in list"""
