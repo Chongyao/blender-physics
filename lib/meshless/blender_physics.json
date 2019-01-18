@@ -1,6 +1,6 @@
 {
     "blender": {
-        "surf": "Cube",
+        "surf": "Sphere",
         "input_format": "obj"
     },
     "physics_para": {
@@ -10,17 +10,17 @@
     "simulation_para": {
         "num_in_axis": 8,
         "kv": 500.0,
-        "nn_num": 3,
+        "nn_num": 10,
         "w_g": 10.0,
         "dump": 1.0,
         "w_coll": 200.0,
-        "g_pos": 3.0,
+        "g_pos": -3.0,
         "position_weig": 99999.0
     },
     "common": {
-        "time_step": 0.10000000149011612,
+        "time_step": 9.999999747378752e-05,
         "frame_rate": 20,
-        "total_time": 1.0,
+        "total_time": 2.0,
         "density": 5.0,
         "gravity": 9.800000190734863
     }

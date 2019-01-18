@@ -1,31 +1,29 @@
 {
   "common":{
-    "time_step":0.1,
-    "frame_rate":20,
-    "total_time":1.0,
-    "density":5.0,    
-    "gravity":9.8
+    "time_step": 0.0001,
+    "frame_rate": 1000,
+    "total_time": 1.0,
+    "density": 5.0,
+    "gravity": 9.8
   },
   "meshless":{
-    "blender":{
-      "surf":"",
-      "input_format":"obj"
+    "blender": {
+      "surf": "",
+      "input_format": "obj"
     },
-    
-    "physics_para":{
-      "Poission":0.45,
-      "Young":7000.0
+    "physics_para": {
+      "Poission": 0.45,
+      "Young": 7000.0
     },
-    
-    "simulation_para":{
-      "num_in_axis":8,
-      "kv" : 500.0,
-      "nn_num":3,
+    "simulation_para": {
+      "num_in_axis": 8,
+      "kv": 500.0,
+      "nn_num": 10,
       "w_g": 10.0,
-      "dump":1.0,
-      "w_coll":200.0,
-      "g_pos":3.0,
-      "position_weig":99999.0
+      "dump": 1.0,
+      "w_coll": 200.0,
+      "g_pos": -3.0,
+      "position_weig": 99999.0
     }
   },
   "mass_spring":{
