@@ -50,7 +50,7 @@ int main(int argc, char** argv){
   size_t frame_rate = common.get<size_t>("frame_rate");
   size_t max_iter = static_cast<size_t>(ceil(total_time / delt_t));
   size_t iters_per_frame = static_cast<size_t>(1.0 / delt_t / frame_rate);
-  cout << "max iter is " << max_iter << endl;
+  cout << "max iter is " << max_iter << endl;g
   for(size_t i = 0; i < max_iter; ++i){
     nods.col(0) += VectorXd::Ones(nods.rows())*delt_t * gravity;
     
