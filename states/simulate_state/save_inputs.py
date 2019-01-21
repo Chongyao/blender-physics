@@ -101,6 +101,7 @@ def save_parameters(context, discrete_method, input_path):
         temp_data = json.load(json_temp_file)
 
     common_data = temp_data['common']
+
     json_temp = temp_data[discrete_method]
     json_temp['common'] = common_data
     #set parameters in json
@@ -112,7 +113,7 @@ def save_parameters(context, discrete_method, input_path):
             else:
                 json_temp[cate][para] = eval('para_props.' + discrete_method + '.'+ cate + '.' + para)
     json_temp['blender']['surf'] = context.scene.physika.physika_object_name
-    
+    print(json_temp)    
     #write json        
     with open(file_path, 'w') as f:
         json.dump(json_temp, f, indent = 4)

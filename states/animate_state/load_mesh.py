@@ -17,8 +17,9 @@ class MeshLoader(object):
         self.ver_num = ver_num
         
     def get_mesh_filepath(self, frame_id, ext):
-        file_name = self.obj_name+ str(frame_id) +'.' + ext
-        file_path = os.path.join('lib', self.discrete_method, 'output', self.obj_name, file_name)
+
+        file_name = self.obj_name+ "_" + str(frame_id) +'.' + ext
+        file_path = os.path.join('lib', self.discrete_method, 'output', self.obj_name,  file_name)
         return file_path
 
     """import vertices and triangles by tuple in list"""
@@ -41,7 +42,8 @@ class MeshLoader(object):
         return vertexs, triangles
     def get_new_vertices_position(self, file_path):
         """ simple read form obj"""
-        with open(file_path) as f:
+        print("get_new_vertices_position " , os.getcwd())
+        with open(file_path, 'r') as f:
             obj_data = f.read()
 
         vertexs = obj_data.split('f')[0].replace('v','').split()
