@@ -30,9 +30,11 @@ class Property_add_subproperty():
         ))
     def add_enum_parameter(self, Property, attr, _items, attr_default = 0, attr_min = sys.float_info.min, attr_max = sys.float_info.max):
         # assert isinstance(Property, bpy.types.PropertyGroup)
+        attr_items = tuple((item, item, item) for item in _items.split('_'))
+        print(_items.split('_'))
         setattr(Property, attr, EnumProperty(
             name = attr,
-            items = _items
+            items = attr_items
         ))        
         
     def add_pointer(self, Property, attr, attr_type):
