@@ -50,6 +50,8 @@ for method, cates in methods.items():
                 elif type(value) == int:
                     exec('property_adder.add_int_parameter(' + method + '_' + cate + ', para, attr_default = value)')
                 elif type(value) == str:
+                    exec('property_adder.add_enum_parameter(' + method + '_' + cate + ', para, value)')
+
                     #TODO: add enum
                     pass
         exec('setattr(physika_' + method + ', "' + cate + '", PointerProperty(type = ' + method + '_' + cate +'))')

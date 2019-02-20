@@ -23,7 +23,8 @@
       "dump": 1.0,
       "w_coll": 200.0,
       "g_pos": -3.0,
-      "position_weig": 99999.0
+      "position_weig": 99999.0,
+      "solver":"explicit_implicit"
     }
   },
   "mass_spring":{
