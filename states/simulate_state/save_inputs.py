@@ -28,7 +28,7 @@ def save_model(context, discrete_method, input_path):
     if_tetgen = False
     if(ext == 'obj'):
         file_path = os.path.join('./', obj.name + '.obj')
-        bpy.ops.export_scene.obj(filepath = file_path, use_mesh_modifiers=False, use_normals=False)
+        bpy.ops.export_scene.obj(filepath = file_path, use_mesh_modifiers=False, use_normals=False, axis_forward='Y', axis_up='Z', keep_vertex_order=True)
         if_tetgen = False
     elif(ext == 'vtk'):
         file_path = os.path.join('./', obj.name + '.ply')
