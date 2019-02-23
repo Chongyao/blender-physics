@@ -17,6 +17,7 @@
 if "bpy" in locals():
     import importlib
     reloadable_modules = [
+        'obstacle_state',
         'constraint_state',
         'animate_state',
         'simulate_state',
@@ -30,6 +31,7 @@ if "bpy" in locals():
 import bpy
 
 from . import (
+    obstacle_state,
     simulate_state,
     constraint_state,
     animate_state,
@@ -39,6 +41,7 @@ from . import (
 
 
 def register():
+    obstacle_state.register()
     constraint_state.register()
     simulate_state.register()
     animate_state.register()
@@ -46,6 +49,7 @@ def register():
     export_state.register()
 
 def unregister():
+    obstacle_state.unregister()
     constraint_state.unregister()
     simulate_state.unregister()
     animate_state.unregister()
