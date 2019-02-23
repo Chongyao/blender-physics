@@ -52,13 +52,15 @@ def register_state():
     state.next = 'parameter'
     state.prev = 'None'
 
-    
+from . import constraint_operators
 def register():
+    constraint_operators.register()
     bpy.utils.register_class(physika_constraint_op_previous)
     bpy.utils.register_class(physika_constraint_op_next)
     bpy.utils.register_class(physika_constraint_ui)
 
 def unregister():
+    constraint_operators.unregister()
     bpy.utils.unregister_class(physika_constraint_op_previous)
     bpy.utils.unregister_class(physika_constraint_op_next)    
     bpy.utils.unregister_class(physika_constraint_ui)
