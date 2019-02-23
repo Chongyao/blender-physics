@@ -17,7 +17,7 @@ class physika_obstacle_ui(physika_base_ui):
     
     def specific_draw(self, context):
         obta_props = context.scene.physika_obstacles
-
+        
         #chooes object
         target_box = self.layout.box()
         target_row = target_box.row()

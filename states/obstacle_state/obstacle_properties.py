@@ -2,18 +2,22 @@ import bpy
 from bpy.props import (
     PointerProperty,
     CollectionProperty,
-    IntProperty
+    IntProperty,
+    BoolProperty
 )
 
 def scene_chosenobject_poll(self, object):
     physika_obj_name = bpy.context.scene.physika.physika_object_name
-    return object.type == 'MESH' and object.name != physika_obj_name
+    return object.type == 'MESH' and object.name != physika_obj_name and object.physika.is_obstacle == False
+
+
 
 class physika_obj_ptr(bpy.types.PropertyGroup):
     obj_ptr = PointerProperty(
         name = "Obj_Pointer",
         type = bpy.types.Object
     )
+
 
 class physika_obstacles(bpy.types.PropertyGroup):
     @classmethod
@@ -29,7 +33,7 @@ class physika_obstacles(bpy.types.PropertyGroup):
     index = IntProperty(default = -1)
 
     chosen_obj = PointerProperty(
-        name = "chosen obj",
+        name = "choose obstacle",
         type = bpy.types.Object,
         poll = scene_chosenobject_poll
     )

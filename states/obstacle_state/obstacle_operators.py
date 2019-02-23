@@ -45,14 +45,18 @@ class physika_obstacle_list_operators(bpy.types.Operator):
                 self.report({'INFO'}, info)
                 
         if self.action == 'ADD':
-            if context.object:
+            if obta_props.chosen_obj and obta_props.chosen_obj.physika.is_obstacle == False:
+                chosen_obj = obta_props.chosen_obj
                 item = obta_props.objs.add()
-                item.name = context.object.name
+                item.name = chosen_obj.name
                 print(item.name)
-                item.obj_ptr = context.object
+                item.obj_ptr = chosen_obj
                 obta_props.index = len(obta_props.objs)-1
+                chosen_obj.physika.is_obstacle = True
                 info = '"%s" added to list' % (item.name)
                 self.report({'INFO'}, info)
+
+                chosen_obj = None
             else:
                 self.report({'INFO'}, "Nothing selected in the Viewport")
         return {"FINISHED"}

@@ -36,6 +36,7 @@ class PhysiKaObjectProperties(bpy.types.PropertyGroup):
         #         set=lambda self, value: self._set_object_type(value),
         #         update=lambda self, context: self._update_object_type(context),
         # )
+        cls.is_obstacle = BoolProperty(default=False)
         cls.is_active = BoolProperty(default=False)
         cls.bake = PointerProperty(
             name = 'Physika Bake Properties',
