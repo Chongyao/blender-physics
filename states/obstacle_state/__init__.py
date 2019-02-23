@@ -5,7 +5,7 @@ from ..base_state import *
 class physika_obstacle_list(bpy.types.UIList):
     
     def draw_item(self, context, layout, data, item, icon, active_data, active_propname, index):
-        obj = item.obj
+        obj = item.obj_ptr
         custom_icon = "OUTLINER_OB_%s" % obj.type
         split = layout.split(0.3)
         split.label("Index: %d" % (index))
@@ -17,8 +17,22 @@ class physika_obstacle_ui(physika_base_ui):
     
     def specific_draw(self, context):
         obta_props = context.scene.physika_obstacles
-        self.layout.template_list("physika_obstacle_list", "", obta_props, "objs", obta_props, "index", rows=2)
-        print(obta_props.index)
+
+        #chooes object
+        target_box = self.layout.box()
+        target_row = target_box.row()
+        target_row.prop(obta_props, 'chosen_obj')
+        
+
+        row = self.layout.row()
+        row.template_list("physika_obstacle_list", "", obta_props, "objs", obta_props, "index", rows=2)
+        
+        col = row.column(align=True)
+        col.operator("physika_operators.list_action", icon='ZOOMIN', text="").action = 'ADD'
+        col.operator("physika_operators.list_action", icon='ZOOMOUT', text="").action = 'REMOVE'
+        col.separator()
+        col.operator("physika_operators.list_action", icon='TRIA_UP', text="").action = 'UP'
+        col.operator("physika_operators.list_action", icon='TRIA_DOWN', text="").action = 'DOWN'
 
 class physika_obstacle_op_previous(physika_base_op_previous):
     physika_state = 'obstacle'
