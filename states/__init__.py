@@ -13,41 +13,24 @@
 # 
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+import os,bpy
+script_path = os.path.dirname(os.path.realpath(__file__))
+state_names = [f.split('.')[0] for f in os.listdir(script_path) if f.endswith('_state')]
 
 if "bpy" in locals():
     import importlib
-    reloadable_modules = [
-        'constraint_state',
-        'animate_state',
-        'simulate_state',
-        'parameter_state',
-        'export_state'
-    ]
-    for module_name in reloadable_modules:
+    for module_name in state_names:
         if module_name in locals():
             importlib.reload(locals()[module_name])
 
-import bpy
-
-from . import (
-    simulate_state,
-    constraint_state,
-    animate_state,
-    parameter_state,
-    export_state
-)
+for state in state_names:
+    exec('from ..states import ' + state)
 
 
 def register():
-    constraint_state.register()
-    simulate_state.register()
-    animate_state.register()
-    parameter_state.register()
-    export_state.register()
-
+    for state in state_names:
+        exec(state + '.register()')
+        
 def unregister():
-    constraint_state.unregister()
-    simulate_state.unregister()
-    animate_state.unregister()
-    parameter_state.unregister()
-    export_state.unregister()
+    for state in state_names:
+        exec(state + '.unregister()')

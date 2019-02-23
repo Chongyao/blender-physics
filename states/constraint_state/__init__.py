@@ -1,5 +1,5 @@
 import bpy
-from .base_state import *
+from ..base_state import *
 
 
 
@@ -31,7 +31,9 @@ class physika_constraint_ui(physika_base_ui):
                               text = "Clear Constraint")
         else:
             column.operator("physika_operators.enable_constraint",
-                          text = "Enable Constraint")                        
+                          text = "Enable Constraint")
+
+            
 
 
 
@@ -50,16 +52,18 @@ def register_state():
     state = bpy.data.scenes['Scene'].physika_state_graph.add()
     state.curr = 'constraint'
     state.next = 'parameter'
-    state.prev = 'None'
+    state.prev = 'obstacle'
 
-    
+from . import (constraint_operators)
+               
 def register():
+    constraint_operators.register()
     bpy.utils.register_class(physika_constraint_op_previous)
     bpy.utils.register_class(physika_constraint_op_next)
     bpy.utils.register_class(physika_constraint_ui)
 
 def unregister():
+    constraint_operators.unregister()
     bpy.utils.unregister_class(physika_constraint_op_previous)
     bpy.utils.unregister_class(physika_constraint_op_next)    
     bpy.utils.unregister_class(physika_constraint_ui)
-

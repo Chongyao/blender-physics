@@ -33,7 +33,7 @@ from . import (
     object_operators,
     # animate_operators,
     # bake_operators,
-    constraint_operators,
+    # constraint_operators,
     
 )
 
@@ -42,11 +42,11 @@ def register():
     object_operators.register()
     # animate_operators.register()
     # bake_operators.register()
-    constraint_operators.register()
+    #constraint_operators.register()
     
 
 def unregister():
     object_operators.unregister()
     # animate_operators.unregister()
     # bake_operators.unregister()
-    constraint_operators.unregister()
+    # constraint_operators.unregister() 
