@@ -33,4 +33,4 @@ def register():
         
 def unregister():
     for state in state_names:
-        exec(state + '.register()')
+        exec(state + '.unregister()')

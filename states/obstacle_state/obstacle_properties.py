@@ -1,7 +1,8 @@
 import bpy
 from bpy.props import (
     PointerProperty,
-    CollectionProperty
+    CollectionProperty,
+    IntProperty
 )
 
 
@@ -19,9 +20,10 @@ class physika_obstacles(bpy.types.PropertyGroup):
             type= cls
         )
 
-        cls.objs = CollectionProperty(
+    objs = CollectionProperty(
             type = physika_obj_ptr
         )
+    index = IntProperty(default = -1)
 
 def register():
     bpy.utils.register_class(physika_obj_ptr)
