@@ -1,7 +1,7 @@
 {
   "common":{
-    "time_step": 0.0001,
-    "frame_rate": 1000,
+    "time_step": 0.01,
+    "frame_rate": 20,
     "total_time": 1.0,
     "density": 5.0,
     "gravity": 9.8
