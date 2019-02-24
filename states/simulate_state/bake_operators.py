@@ -27,10 +27,15 @@ class BakePhysiKaSimulation(bpy.types.Operator):
         discrete_method = context.scene.physika_para.physika_discrete
         
         input_path = os.path.join(script_path,'lib',discrete_method,'input')
+        
+        save_inputs.clear_cache(context, discrete_method, input_path)
         save_inputs.save_model(context, discrete_method, input_path)
         save_inputs.save_constraint(context, input_path)
         save_inputs.save_parameters(context, discrete_method, input_path)
-        save_inputs.clear_cache(context, discrete_method, input_path)
+        save_inputs.save_obstacles(context, input_path)
+
+        
+        
 
         
     def run_simulation(self, obj, if_tetgen):

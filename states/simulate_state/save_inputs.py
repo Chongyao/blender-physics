@@ -8,14 +8,16 @@ def valid_common_props(string):
 def clear_cache(context, discrete_method, input_path):
     obj_name = context.scene.physika.physika_object_name
     raw_path = os.getcwd()
-    os.chdir(input_path)
+    os.chdir(os.path.dirname(input_path))
 
-    cache_dir = os.path.join('../', 'output', obj_name)
-    print(cache_dir)
+    if(os.path.exists('input')):
+        shutil.rmtree('input')
+        os.makedirs('input')
+        
+    cache_dir = os.path.join('output', obj_name)
     if(os.path.exists(cache_dir)):
         shutil.rmtree(cache_dir)
-        print("clear cache")
-    
+        
     os.chdir(raw_path)
     
 def save_model(context, discrete_method, input_path):
@@ -28,7 +30,7 @@ def save_model(context, discrete_method, input_path):
     if_tetgen = False
     if(ext == 'obj'):
         file_path = os.path.join('./', obj.name + '.obj')
-        bpy.ops.export_scene.obj(filepath = file_path, use_mesh_modifiers=False, use_normals=False, axis_forward='Y', axis_up='Z', keep_vertex_order=True)
+        bpy.ops.export_scene.obj(filepath = file_path, use_mesh_modifiers=False, use_normals=False, axis_forward='Y', axis_up='Z', keep_vertex_order=True, use_materials=False, use_selection = True)
         if_tetgen = False
     elif(ext == 'vtk'):
         file_path = os.path.join('./', obj.name + '.ply')
@@ -92,3 +94,24 @@ def save_parameters(context, discrete_method, input_path):
     os.chdir(raw_path)
 
     
+def save_obstacles(context, input_path):
+    raw_path = os.getcwd()
+    os.chdir(input_path)
+    if not os.path.exists('obstacles'):
+        os.makedirs('obstacles')
+    os.chdir('obstacles')
+
+    physika_obj = context.scene.objects.active
+    physika_obj.select = False
+
+    obstacles = context.scene.physika_obstacles.objs
+    for obsta in obstacles:
+        obsta.obj_ptr.select = True
+        
+        file_path = os.path.join('./', obsta.obj_ptr.name + '.obj')
+        bpy.ops.export_scene.obj(filepath = file_path, use_mesh_modifiers=False, use_normals=False, axis_forward='Y', axis_up='Z', keep_vertex_order=True, use_materials=False, use_selection = True, use_triangles = True)
+
+        obsta.obj_ptr.select = False
+
+    physika_obj.select = True
+    os.chdir(raw_path)
