@@ -53,10 +53,11 @@ def save_constraint(context, input_path):
             
             
     vs = [ v for v in obj.data.vertices if vg_idx in [ vg.group for vg in v.groups ] ]
+    vs_world = [obj.matrix_world * v_local.co for v_local in vs]
     with open(file_path,'w') as f:
         f.write('"vtkOriginalPointIds","Points:0","Points:1","Points:2"\n')
-        for v in vs:
-            f.write(str(v.index) + ',' + str(v.co[0]) +','+str(v.co[1]) + ',' + str(v.co[2]) + '\n')
+        for v_world,v in zip(vs_world, vs):
+            f.write(str(v.index) + ',' + str(v_world[0]) +','+str(v_world[1]) + ',' + str(v_world[2]) + '\n')
     
             os.chdir(raw_path)
 
