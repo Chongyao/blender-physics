@@ -1,3 +1,4 @@
+*.zip
 tetgen1.5.1/
 blender_physics.json
 .DS_Store
