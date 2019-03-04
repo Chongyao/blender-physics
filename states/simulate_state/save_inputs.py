@@ -7,12 +7,18 @@ def valid_common_props(string):
 
 def clear_cache(context, discrete_method, input_path):
     obj_name = context.scene.physika.physika_object_name
-    raw_path = os.getcwd()
+    raw_path = os.getcwd() 
     os.chdir(os.path.dirname(input_path))
+    
+    if(os.path.exists('input') == False):
+        os.makedirs(input_path)
+        
+        
+    if(os.path.exists(os.path.join('input', obj_name) ) ):
+        shutil.rmtree(os.path.join('input', obj_name))
+        
+    os.makedirs(os.path.join('input', obj_name))
 
-    if(os.path.exists('input')):
-        shutil.rmtree('input')
-        os.makedirs('input')
         
     cache_dir = os.path.join('output', obj_name)
     if(os.path.exists(cache_dir)):
@@ -66,10 +72,10 @@ def save_constraint(context, input_path):
 def save_parameters(context, discrete_method, input_path):
     raw_path = os.getcwd()
     os.chdir(input_path)
-    file_path = os.path.join('../', 'blender_physics.json' )
+    file_path = os.path.join('./', 'blender_physics.json' )
 
     #read json template 
-    json_temp_path = '../../../states/parameter_state/para_temp.json'
+    json_temp_path = '../../../../states/parameter_state/para_temp.json'
     print(json_temp_path)
     with open(json_temp_path, 'r') as json_temp_file:
         temp_data = json.load(json_temp_file)
@@ -96,6 +102,7 @@ def save_parameters(context, discrete_method, input_path):
 
     
 def save_obstacles(context, input_path):
+    obj = context.scene.objects.active
     raw_path = os.getcwd()
     os.chdir(input_path)
     if not os.path.exists('obstacles'):
