@@ -25,7 +25,8 @@ def bake(discrete_method, obj, if_tetgen):
     raw_path = os.getcwd()
     script_path = os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
     os.chdir(os.path.join(script_path,'lib', discrete_method,'bin'))
-    json_path = '../blender_physics.json'
+    # json_path = '../blender_physics.json'
+    json_path = os.path.join('..', 'input', obj.name, 'blender_physics.json')
     sim_res = subprocess.run(['./blender_' + discrete_method, json_path])
     os.chdir(raw_path)
     if(if_tetgen):

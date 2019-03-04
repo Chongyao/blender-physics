@@ -25,10 +25,13 @@ class BakePhysiKaSimulation(bpy.types.Operator):
     def save_input_files(self,context):
         script_path = os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
         discrete_method = context.scene.physika_para.physika_discrete
-        
+
         input_path = os.path.join(script_path,'lib',discrete_method,'input')
-        
         save_inputs.clear_cache(context, discrete_method, input_path)
+        
+        obj_name = context.scene.physika.physika_object_name
+        input_path = os.path.join(input_path, obj_name)
+        
         save_inputs.save_model(context, discrete_method, input_path)
         save_inputs.save_constraint(context, input_path)
         save_inputs.save_parameters(context, discrete_method, input_path)
