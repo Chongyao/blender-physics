@@ -24,13 +24,27 @@
       "w_coll": 200.0,
       "g_pos": -3.0,
       "position_weig": 99999.0,
-      "solver":"explicit_implicit"
+      "solver":"explicit/implicit"
     }
   },
   "mass_spring":{
     "blender":{
       "surf":"",
       "input_format":"vtk"
+    },
+    "simulation_para": {
+      "stiffness":2000,
+      "weight_line_search":1e-5,
+      "line_search":true,
+      "intensity":0,
+      "newton_fastMS":"newton/fastMS_original/fastMS_ChebyshevSIM"
+    },
+    "common": {
+      "time_step": 0.01,
+      "frame_rate": 50,
+      "total_time": 12.0,
+      "density": 10,
+      "gravity": 9.8
     }
   },
   "FEM":{
