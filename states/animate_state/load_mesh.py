@@ -38,20 +38,20 @@ class MeshLoader(object):
         for i in range(self.ver_num):
             for one_data in obj_data[vertex_data_line_id + i].split():
                 vertexs.append(float(one_data))
-        print(vertexs)
+
         return vertexs
     
     
     def get_new_vertices_position(self, file_path):
         """ simple read form obj"""
-        print("get_new_vertices_position " , os.getcwd())
+
         with open(file_path, 'r') as f:
             obj_data = f.read()
 
         vertexs = obj_data.split('f')[0].replace('v','').split()
     
         vertexs = list(map(float, vertexs))
-        print(vertexs)
+
         return vertexs
     
     
