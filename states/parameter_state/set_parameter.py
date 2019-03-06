@@ -51,6 +51,8 @@ for method, cates in methods.items():
                     exec('property_adder.add_int_parameter(' + method + '_' + cate + ', para, attr_default = value)')
                 elif type(value) == str:
                     exec('property_adder.add_enum_parameter(' + method + '_' + cate + ', para, value)')
+                elif type(value) == bool:
+                    exec('property_adder.add_bool_parameter(' + method + '_' + cate + ', para, value)')                    
 
                     #TODO: add enum
                     pass

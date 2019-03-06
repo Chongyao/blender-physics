@@ -30,8 +30,8 @@ class Property_add_subproperty():
         ))
     def add_enum_parameter(self, Property, attr, _items, attr_default = 0, attr_min = sys.float_info.min, attr_max = sys.float_info.max):
         # assert isinstance(Property, bpy.types.PropertyGroup)
-        attr_items = tuple((item, item, item) for item in _items.split('_'))
-        print(_items.split('_'))
+        attr_items = tuple((item, item, item) for item in _items.split('/'))
+        print(_items.split('/'))
         setattr(Property, attr, EnumProperty(
             name = attr,
             items = attr_items
@@ -48,3 +48,8 @@ class Property_add_subproperty():
             default = attr_default
         ))
     
+    def add_bool_parameter(self, Property, attr, attr_default = True):
+        setattr(Property, attr, BoolProperty(
+            name = attr,
+            default = attr_default
+        ))
