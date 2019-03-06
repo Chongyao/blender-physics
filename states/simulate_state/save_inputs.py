@@ -5,6 +5,38 @@ import shutil
 def valid_common_props(string):
     return string.startswith('common')
 
+def obj2ply(discrete_method, obj_name):
+    obj_file_path = os.path.join('./', obj_name + '.obj')    
+    with open(obj_file_path) as obj_f:
+        obj_data = obj_f.readlines()
+ 
+    vertexs =[]
+    triangles = []
+
+    for line in obj_data:
+        if line[0] is 'v':
+            vertexs.append(tuple(map(float, line.replace('v','').replace('\n','').split())))
+        elif line[0] is 'f':
+            triangles.append(tuple(map(int, line.replace('f','').replace('\n','').split())))
+
+            
+    ply_file_path = os.path.join('./', obj_name + '.ply')
+    with open(ply_file_path, 'w') as ply_f:
+        ply_f.write('ply\nformat ascii 1.0\nelement vertex ' + str(len(vertexs)) + "\nproperty float x\nproperty float y\nproperty float z\nelement face " + str(len(triangles))+ "\nproperty list uchar uint vertex_indices\nend_header\n")
+        for v in vertexs:
+            for value in v:
+                ply_f.write(str(value) + " ")
+            ply_f.write("\n")
+        for tri in triangles:
+            ply_f.write('3 ')
+            for vert in tri:
+                ply_f.write(str(vert - 1) + " ")
+            ply_f.write("\n")
+   
+
+
+
+
 def clear_cache(context, discrete_method, input_path):
     obj_name = context.scene.physika.physika_object_name
     raw_path = os.getcwd() 
@@ -39,8 +71,12 @@ def save_model(context, discrete_method, input_path):
         bpy.ops.export_scene.obj(filepath = file_path, use_mesh_modifiers=False, use_normals=False, axis_forward='Y', axis_up='Z', keep_vertex_order=True, use_materials=False, use_selection = True)
         if_tetgen = False
     elif(ext == 'vtk'):
-        file_path = os.path.join('./', obj.name + '.ply')
-        bpy.ops.export_mesh.ply(filepath = file_path, use_mesh_modifiers=False, use_normals=False, axis_forward='Y', axis_up='Z', use_uv_coords=False, use_colors=False)
+        # file_path = os.path.join('./', obj.name + '.ply')
+        # bpy.ops.export_mesh.ply(filepath = file_path, use_mesh_modifiers=False, use_normals=False, axis_forward='Y', axis_up='Z', use_uv_coords=False, use_colors=False)
+        file_path = os.path.join('./', obj.name + '.obj')
+        bpy.ops.export_scene.obj(filepath = file_path, use_mesh_modifiers=False, use_normals=False, axis_forward='Y', axis_up='Z', keep_vertex_order=True, use_materials=False, use_selection = True)
+        obj2ply(discrete_method, obj.name)
+        
         if_tetgen = True 
     os.chdir(raw_path)
     return if_tetgen
@@ -123,3 +159,4 @@ def save_obstacles(context, input_path):
 
     physika_obj.select = True
     os.chdir(raw_path)
+
