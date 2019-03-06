@@ -22,24 +22,27 @@ class MeshLoader(object):
         file_path = os.path.join('lib', self.discrete_method, 'output', self.obj_name,  file_name)
         return file_path
 
-    """import vertices and triangles by tuple in list"""
-    def import_function(self, file_path):
-        """ simple read form obj"""
+ 
+    def get_new_vertices_position_vtk(self, file_path):
+        """read from vtk"""
         with open(file_path) as f:
             obj_data = f.readlines()
 
-        vertexs =[]
-        triangles = []
-
-        for line in obj_data:
-            if line[0] is 'v':
-                vertexs.append(tuple(map(float, line.replace('v','').replace('\n','').split())))
-            elif line[0] is 'f':
-                triangles.append(tuple(map(int, line.replace('f','').replace('\n','').split())))
+        vertexs = []
+        vertex_data_line_id = 0
+        for i in range(len(obj_data)):
+            data_split = obj_data[i].split()
+            if(len(data_split) > 0 and data_split[0] == 'POINTS'):
+                vertex_data_line_id = i + 1
                 
+        for i in range(self.ver_num):
+            for one_data in obj_data[vertex_data_line_id + i].split():
+                print(one_data)
+                vertexs.append(float(one_data))
         print(vertexs)
-        print(triangles)
-        return vertexs, triangles
+        return vertexs
+    
+    
     def get_new_vertices_position(self, file_path):
         """ simple read form obj"""
         print("get_new_vertices_position " , os.getcwd())
@@ -47,8 +50,11 @@ class MeshLoader(object):
             obj_data = f.read()
 
         vertexs = obj_data.split('f')[0].replace('v','').split()
+    
         vertexs = list(map(float, vertexs))
+        print(vertexs)
         return vertexs
+    
     
     def import_frame_mesh(self, frame_id, ext):
         raw_path = os.getcwd()
@@ -57,9 +63,12 @@ class MeshLoader(object):
         os.chdir(script_path)
 
         file_path = self.get_mesh_filepath(frame_id, ext)
-        
-        vertexs_new = self.get_new_vertices_position(file_path)
 
+        if ext == 'obj':
+            vertexs_new = self.get_new_vertices_position(file_path)
+        elif ext == 'vtk':
+            vertexs_new = self.get_new_vertices_position_vtk(file_path)
+        
         cache_object = self.get_physika_object()
         cache_object.data.vertices.foreach_set('co', vertexs_new)
         cache_object.data.update()
