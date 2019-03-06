@@ -37,7 +37,6 @@ class MeshLoader(object):
                 
         for i in range(self.ver_num):
             for one_data in obj_data[vertex_data_line_id + i].split():
-                print(one_data)
                 vertexs.append(float(one_data))
         print(vertexs)
         return vertexs

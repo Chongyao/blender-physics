@@ -40,7 +40,7 @@ def save_model(context, discrete_method, input_path):
         if_tetgen = False
     elif(ext == 'vtk'):
         file_path = os.path.join('./', obj.name + '.ply')
-        bpy.ops.export_mesh.ply(filepath = file_path, use_mesh_modifiers=False, use_normals=False, use_uv_coords=False, use_colors=False)
+        bpy.ops.export_mesh.ply(filepath = file_path, use_mesh_modifiers=False, use_normals=False, axis_forward='Y', axis_up='Z', use_uv_coords=False, use_colors=False)
         if_tetgen = True 
     os.chdir(raw_path)
     return if_tetgen
