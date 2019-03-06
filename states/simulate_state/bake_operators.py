@@ -32,12 +32,12 @@ class BakePhysiKaSimulation(bpy.types.Operator):
         obj_name = context.scene.physika.physika_object_name
         input_path = os.path.join(input_path, obj_name)
         
-        save_inputs.save_model(context, discrete_method, input_path)
+        if_tetgen = save_inputs.save_model(context, discrete_method, input_path)
         save_inputs.save_constraint(context, input_path)
         save_inputs.save_parameters(context, discrete_method, input_path)
         save_inputs.save_obstacles(context, input_path)
 
-        
+        return if_tetgen
         
 
         

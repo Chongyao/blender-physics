@@ -38,13 +38,6 @@
       "line_search":true,
       "intensity":0,
       "newton_fastMS":"newton/fastMS_original/fastMS_ChebyshevSIM"
-    },
-    "common": {
-      "time_step": 0.01,
-      "frame_rate": 50,
-      "total_time": 12.0,
-      "density": 10,
-      "gravity": 9.8
     }
   },
   "FEM":{
