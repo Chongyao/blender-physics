@@ -21,8 +21,6 @@
       "nn_num": 10,
       "w_g": 10.0,
       "dump": 1.0,
-      "w_coll": 200.0,
-      "g_pos": -3.0,
       "position_weig": 99999.0,
       "solver":"explicit/implicit"
     }
@@ -36,7 +34,6 @@
       "stiffness":2000,
       "weight_line_search":1e-5,
       "line_search":true,
-      "intensity":0,
       "newton_fastMS":"newton/fastMS_original/fastMS_ChebyshevSIM"
     }
   },
@@ -44,6 +41,17 @@
     "blender":{
       "surf":"",
       "input_format":"vtk"
+    },
+    "material":{
+      "Young":1e3,
+      "Poisson":0.45
+    },
+    "Solver_option":{
+      "Solver":"IPOPT/SQP",
+      "Maxits":20,
+      "Dynamics":true
     }
   }
+
 }
+
