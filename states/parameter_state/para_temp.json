@@ -34,7 +34,8 @@
       "stiffness":2000,
       "weight_line_search":1e-5,
       "line_search":true,
-      "newton_fastMS":"newton/fastMS_original/fastMS_ChebyshevSIM"
+      "newton_fastMS":"newton/fastMS_original/fastMS_ChebyshevSIM",
+      "w_coll":999.0
     }
   },
   "FEM":{
