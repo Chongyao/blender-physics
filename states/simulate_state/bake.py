@@ -13,7 +13,7 @@ def tetgen(discrete_method, obj_name):
     model_path = input_path + obj_name +'.ply'
     res_path = input_path + obj_name +'.1.vtk'
     vtk_path = input_path + obj_name +'.vtk'
-    res = subprocess.run(['./tetgen', '-k', model_path])
+    res = subprocess.run(['./tetgen', '-kq1.3a1.0', model_path])
     os.rename(res_path, vtk_path)
     os.chdir(raw_path)
     return res
