@@ -46,10 +46,14 @@
     },
     "material":{
       "Young":1e3,
-      "Poisson":0.45
+      "Poisson":0.45,
+      "w_coll":500.0,
+      "thickness":0.1,
+      "damp":99,
+      "constitutive":"linear/stvk/corotational/neohookean"
     },
     "Solver_option":{
-      "Solver":"IPOPT/SQP",
+      "Solver":"IPOPT/SQP/Eigen",
       "Maxits":20,
       "Dynamics":true
     }
