@@ -15,10 +15,10 @@ def obj2ply(discrete_method, obj_name):
 
     for line in obj_data:
         if line[0] is 'v':
-            print(line)
+            # print(line)
             vertexs.append(tuple(map(float, line.replace('v','').replace('\n','').split())))
         elif line[0] is 'f':
-            print(line)
+            # print(line)
             triangles.append(tuple(map(int, line.replace('f','').replace('\n','').split())))
 
             
