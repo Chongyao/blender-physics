@@ -49,7 +49,8 @@
       "Poisson":0.45,
       "w_coll":500.0,
       "thickness":0.1,
-      "damp":99,
+      "k_damp":99,
+      "k_damp":5,
       "constitutive":"linear/stvk/corotational/neohookean"
     },
     "Solver_option":{
