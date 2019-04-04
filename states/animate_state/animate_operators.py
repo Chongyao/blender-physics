@@ -37,6 +37,7 @@ class AnimatePhysika(bpy.types.Operator):
         method = para_props.physika_discrete
         ext = eval('para_props.' + method + '.blender.input_format')
         context.scene.frame_end = frames
+        context.scene.render.fps = frame_rate
         for frame_id in range(frames):
             scene.frame_set(frame_id)
             
