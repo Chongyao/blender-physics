@@ -15,7 +15,7 @@ def tetgen(discrete_method, obj_name):
     vtk_path = input_path + obj_name +'.vtk'
     res = subprocess.run(['./tetgen', '-Ykq1.3a1.0', model_path])
     all_files = os.listdir(input_path)
-    res_path = [k for k in all_files if "vtk" in k]
+    res_path = input_path + [k for k in all_files if "vtk" in k]
     os.rename(res_path, vtk_path)
     os.chdir(raw_path)
     return res
