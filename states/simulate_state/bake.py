@@ -11,11 +11,11 @@ def tetgen(discrete_method, obj_name):
     exe = './tetgen'
     input_path = '../../' + discrete_method + '/input/' + obj_name + "/"
     model_path = input_path + obj_name +'.ply'
-    # res_path = input_path + obj_name +'.1.vtk'
     vtk_path = input_path + obj_name +'.vtk'
+    # res_path = input_path + obj_name +'.1.vtk'
     res = subprocess.run(['./tetgen', '-Ykq1.3a1.0', model_path])
     all_files = os.listdir(input_path)
-    res_path = input_path + [k for k in all_files if "vtk" in k]
+    res_path = input_path + [k for k in all_files if "vtk" in k][0]
     os.rename(res_path, vtk_path)
     os.chdir(raw_path)
     return res
