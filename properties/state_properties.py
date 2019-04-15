@@ -29,11 +29,11 @@ class physika_state_graph(bpy.types.PropertyGroup):
 def register():
     bpy.utils.register_class(physika_base_state_properties)
     bpy.utils.register_class(physika_state_graph)
-    bpy.utils.register_class(physika_state_properties)
+
 
 def unregister():
 
     bpy.utils.unregister_class(physika_base_state_properties)
     bpy.utils.unregister_class(physika_state_graph)
-    bpy.utils.unregister_class(physika_state_properties)
+
 
