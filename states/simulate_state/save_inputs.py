@@ -92,7 +92,7 @@ def save_constraint(context, input_path):
     file_path = os.path.join('./', obj.name+'.csv')
     vg_idx = -1
     for group in obj.vertex_groups:
-        if group.name == 'PhysikaConstraint':
+        if group.name == obj.name + '_PhysikaConstraint':
             vg_idx = group.index
             
             

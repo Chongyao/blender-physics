@@ -14,10 +14,7 @@ class AnimatePhysika(bpy.types.Operator):
     bl_options = {'REGISTER'}
 
 
-    def get_physika_object(self):
-        for obj in bpy.data.objects:
-            if obj.physika.is_active == True:
-                return obj
+
 
     
     def execute(self, context):
@@ -25,7 +22,7 @@ class AnimatePhysika(bpy.types.Operator):
         ver_num = len(context.object.data.vertices)
         obj_name = scene.physika.physika_object_name
         mesh_loader = load_mesh.MeshLoader(scene.physika_para.physika_discrete, obj_name, ver_num);
-        obj = self.get_physika_object()
+        obj = context.objects.active
         obj.select = True
         bpy.data.window_managers["WinMan"].key_points = True
 

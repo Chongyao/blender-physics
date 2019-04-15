@@ -78,9 +78,10 @@ class MeshLoader(object):
         return cache_object
     
     def get_physika_object(self):
-        for obj in bpy.data.objects:
-            if obj.physika.is_active == True:
-                return obj
+        # for obj in bpy.data.objects:
+        #     if obj.physika.is_active == True:
+                # return obj
+        return bpy.data.objects[self.obj_name]
             
 
     def update_transforms(self):
