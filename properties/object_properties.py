@@ -12,9 +12,11 @@ from bpy.props import(
     BoolProperty,
     EnumProperty,
     PointerProperty,
+    StringProperty
 )
 from . import(
-    bake_properties
+    bake_properties,
+    state_properties
 )
 
 from .. import types
@@ -34,7 +36,12 @@ class PhysiKaObjectProperties(bpy.types.PropertyGroup):
             description = '',
             type = bake_properties.PyhsikaBakeProperties   
         )
-
+        # cls.state = PointerProperty(
+        #     name = "Physika State properties",
+        #     description = '',
+        #     type = state_properties.physika_state_properties
+        # )
+        cls.state = StringProperty(default = 'obstacle')
     @classmethod    
     def unregister(cls):
         del bpy.types.Object.physika
