@@ -150,7 +150,7 @@ def save_obstacles(context, input_path):
     physika_obj = context.scene.objects.active
     physika_obj.select = False
 
-    obstacles = context.scene.physika_obstacles.objs
+    obstacles = physika_obj.physika.obstacles.objs
     for obsta in obstacles:
         obsta.obj_ptr.select = True
         
