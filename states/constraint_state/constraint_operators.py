@@ -76,3 +76,4 @@ def unregister():
     bpy.utils.unregister_class(PhysikaEnableConstraint)
     bpy.utils.unregister_class(PhysiKaAddConstraint)
     bpy.utils.unregister_class(PhysikaClearConstraint)
+z
