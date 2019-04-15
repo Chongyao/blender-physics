@@ -16,7 +16,7 @@ class physika_obstacle_list_operators(bpy.types.Operator):
             ('ADD', "Add", "")))
 
     def invoke(self, context, event):
-        obta_props = context.scene.physika_obstacles
+        obta_props = context.scene.objects.active.physika.obstacles
         idx = obta_props.index
 
         try:

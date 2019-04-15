@@ -19,6 +19,7 @@ from . import(
     state_properties
 )
 
+
 from .. import types
 class PhysiKaObjectProperties(bpy.types.PropertyGroup):
     @classmethod
@@ -44,6 +45,9 @@ class PhysiKaObjectProperties(bpy.types.PropertyGroup):
         # )
         cls.state = StringProperty(default = 'obstacle')
         cls.enable_constraint = BoolProperty(default = False)
+        cls.is_obstacle = BoolProperty(default = False)
+        cls.obstacles = None
+        
     @classmethod    
     def unregister(cls):
         del bpy.types.Object.physika
