@@ -36,12 +36,14 @@ class PhysiKaObjectProperties(bpy.types.PropertyGroup):
             description = '',
             type = bake_properties.PyhsikaBakeProperties   
         )
+        
         # cls.state = PointerProperty(
         #     name = "Physika State properties",
         #     description = '',
         #     type = state_properties.physika_state_properties
         # )
         cls.state = StringProperty(default = 'obstacle')
+        cls.enable_constraint = BoolProperty(default = False)
     @classmethod    
     def unregister(cls):
         del bpy.types.Object.physika
