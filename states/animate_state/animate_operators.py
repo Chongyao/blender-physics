@@ -22,7 +22,7 @@ class AnimatePhysika(bpy.types.Operator):
         ver_num = len(context.object.data.vertices)
         obj_name = scene.objects.active.name
         mesh_loader = load_mesh.MeshLoader(scene.physika_para.physika_discrete, obj_name, ver_num);
-        obj = context.objects.active
+        obj = scene.objects.active
         obj.select = True
         bpy.data.window_managers["WinMan"].key_points = True
 
