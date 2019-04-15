@@ -29,7 +29,7 @@ class BakePhysiKaSimulation(bpy.types.Operator):
         input_path = os.path.join(script_path,'lib',discrete_method,'input')
         save_inputs.clear_cache(context, discrete_method, input_path)
         
-        obj_name = context.scene.physika.physika_object_name
+        obj_name = context.scene.objects.active.name
         input_path = os.path.join(input_path, obj_name)
         
         if_tetgen = save_inputs.save_model(context, discrete_method, input_path)

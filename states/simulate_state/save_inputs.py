@@ -40,7 +40,7 @@ def obj2ply(discrete_method, obj_name):
 
 
 def clear_cache(context, discrete_method, input_path):
-    obj_name = context.scene.physika.physika_object_name
+    obj_name = context.scene.objects.active.name
     raw_path = os.getcwd() 
     os.chdir(os.path.dirname(input_path))
     
@@ -130,7 +130,7 @@ def save_parameters(context, discrete_method, input_path):
                 json_temp[cate][para] = eval('para_props.common.' + para)
             else:
                 json_temp[cate][para] = eval('para_props.' + discrete_method + '.'+ cate + '.' + para)
-    json_temp['blender']['surf'] = context.scene.physika.physika_object_name
+    json_temp['blender']['surf'] = context.scene.objects.active.name
     print(json_temp)    
     #write json        
     with open(file_path, 'w') as f:

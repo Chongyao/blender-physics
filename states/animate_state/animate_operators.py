@@ -20,7 +20,7 @@ class AnimatePhysika(bpy.types.Operator):
     def execute(self, context):
         scene = context.scene
         ver_num = len(context.object.data.vertices)
-        obj_name = scene.physika.physika_object_name
+        obj_name = scene.objects.active.name
         mesh_loader = load_mesh.MeshLoader(scene.physika_para.physika_discrete, obj_name, ver_num);
         obj = context.objects.active
         obj.select = True

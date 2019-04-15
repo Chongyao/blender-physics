@@ -8,7 +8,6 @@ from bpy.props import (
 from ...properties.object_properties import PhysiKaObjectProperties
 
 def scene_chosenobject_poll(self, object):
-    # physika_obj_name = bpy.context.scene.physika.physika_object_name
     physika_obj_name = bpy.context.scene.objects.active.name
     return object.type == 'MESH' and object.name != physika_obj_name and object.physika.is_obstacle == False
     # return object.type == 'MESH'  and object.physika.is_obstacle == False
