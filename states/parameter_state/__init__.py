@@ -35,7 +35,7 @@ class physika_parameter_ui(physika_base_ui):
         
     def specific_draw(self, context):
 
-        para_props = context.objects.active.physika.physika_para
+        para_props = context.scene.objects.active.physika.physika_para
         
         column = self.layout.column()
         column.label("Set Discrete Method")
