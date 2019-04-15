@@ -35,7 +35,7 @@
       "weight_line_search":1e-5,
       "line_search":true,
       "newton_fastMS":"newton/fastMS_original/fastMS_ChebyshevSIM",
-      "w_coll":999.0,
+      "w_coll":1.5,
       "thickness":0.1,
       "k_damp":0,
       "m_damp":5
