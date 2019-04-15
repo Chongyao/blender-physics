@@ -63,7 +63,7 @@ def clear_cache(context, discrete_method, input_path):
 def save_model(context, discrete_method, input_path):
     #TODO get physika object
     obj = context.scene.objects.active
-    ext = eval('context.scene.physika_para.' + discrete_method + '.blender.input_format')
+    ext = eval('obj.physika.physika_para.' + discrete_method + '.blender.input_format')
     raw_path = os.getcwd()
     os.chdir(input_path)
 
@@ -108,6 +108,7 @@ def save_constraint(context, input_path):
 
 
 def save_parameters(context, discrete_method, input_path):
+    obj = context.scene.objects.active
     raw_path = os.getcwd()
     os.chdir(input_path)
     file_path = os.path.join('./', 'blender_physics.json' )
@@ -123,14 +124,14 @@ def save_parameters(context, discrete_method, input_path):
     json_temp = temp_data[discrete_method]
     json_temp['common'] = common_data
     #set parameters in json
-    para_props = context.scene.physika_para
+    para_props = obj.physika.physika_para
     for cate, paras in json_temp.items():
         for para, value in paras.items():
             if(cate == 'common'):
                 json_temp[cate][para] = eval('para_props.common.' + para)
             else:
                 json_temp[cate][para] = eval('para_props.' + discrete_method + '.'+ cate + '.' + para)
-    json_temp['blender']['surf'] = context.scene.objects.active.name
+    json_temp['blender']['surf'] = obj.name
     print(json_temp)    
     #write json        
     with open(file_path, 'w') as f:
