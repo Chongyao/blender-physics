@@ -101,7 +101,9 @@ def register():
             exec('bpy.utils.register_class(' + method + '_' + cate + ')')
         exec('bpy.utils.register_class(physika_' + method + ')')
     bpy.utils.register_class(physika_para)
-    bpy.types.Scene.physika_para = PointerProperty(type=physika_para)
+    from ...properties.object_properties import PhysiKaObjectProperties
+    
+    PhysiKaObjectProperties.physika_para = PointerProperty(type=physika_para)
 def unregister():
     bpy.utils.unregister_class(physika_common)
     for method, cates in methods.items():
@@ -111,5 +113,5 @@ def unregister():
             exec('bpy.utils.unregister_class(' + method + '_' + cate + ')')
         exec('bpy.utils.unregister_class(physika_' + method + ')')
     bpy.utils.unregister_class(physika_para)
-    del bpy.types.Scene.physika_para
+    # del bpy.types.Scene.physika_para
 

@@ -16,7 +16,9 @@ class physika_obstacle_list_operators(bpy.types.Operator):
             ('ADD', "Add", "")))
 
     def invoke(self, context, event):
-        obta_props = context.scene.physika_obstacles
+        obj = context.scene.objects.active
+        obj_name = obj.name.replace('.','_')
+        obta_props = obj.physika.obstacles
         idx = obta_props.index
 
         try:
@@ -45,14 +47,17 @@ class physika_obstacle_list_operators(bpy.types.Operator):
                 self.report({'INFO'}, info)
                 
         if self.action == 'ADD':
-            if obta_props.chosen_obj and obta_props.chosen_obj.physika.is_obstacle == False:
+            if obta_props.chosen_obj and eval("obj.physika." + obj_name +  "_obstacle == False"):
                 chosen_obj = obta_props.chosen_obj
                 item = obta_props.objs.add()
                 item.name = chosen_obj.name
                 print(item.name)
                 item.obj_ptr = chosen_obj
                 obta_props.index = len(obta_props.objs)-1
-                chosen_obj.physika.is_obstacle = True
+                
+                # chosen_obj.physika.is_obstacle = True
+                eval("obj.physika." + obj_name +  "_obstacle == True")
+                
                 info = '"%s" added to list' % (item.name)
                 self.report({'INFO'}, info)
 

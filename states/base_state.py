@@ -13,7 +13,7 @@ class physika_base_ui(bpy.types.Panel):
     @classmethod
     def poll(cls, context):
         obj_props = context.scene.objects.active.physika
-        return obj_props.is_active and context.scene.physika_state.state == cls.physika_state
+        return obj_props.is_active and obj_props.state == cls.physika_state
     
     def get_previous(self, context):
         for state in context.scene.physika_state_graph:
@@ -60,7 +60,7 @@ class physika_base_op_next(bpy.types.Operator):
     @classmethod
     def poll(cls,context):
         obj_props = context.scene.objects.active.physika
-        return obj_props.is_active and context.scene.physika_state.state == cls.physika_state
+        return obj_props.is_active and obj_props.state == cls.physika_state
     
     def get_next(self,context):
         for state in context.scene.physika_state_graph:
@@ -70,7 +70,8 @@ class physika_base_op_next(bpy.types.Operator):
         pass
     def execute(self, context):
         self.specific_exec(context)
-        context.scene.physika_state.state = self.get_next(context)
+        obj_props = context.scene.objects.active.physika
+        obj_props.state = self.get_next(context)
         return {'FINISHED'}
 
 class physika_base_op_previous(bpy.types.Operator):
@@ -82,7 +83,7 @@ class physika_base_op_previous(bpy.types.Operator):
     @classmethod
     def poll(cls,context):
         obj_props = context.scene.objects.active.physika
-        return obj_props.is_active and context.scene.physika_state.state == cls.physika_state
+        return obj_props.is_active and obj_props.state == cls.physika_state
 
     def specific_exec(self, context):
         pass
@@ -94,7 +95,8 @@ class physika_base_op_previous(bpy.types.Operator):
     
     def execute(self, context):
         self.specific_exec(context)
-        context.scene.physika_state.state = self.get_previous(context)        
+        obj_props = context.scene.objects.active.physika
+        obj_props.state = self.get_previous(context)        
         return {'FINISHED'}
 
 def register_state():

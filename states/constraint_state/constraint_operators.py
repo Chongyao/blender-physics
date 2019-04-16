@@ -9,18 +9,19 @@ class PhysikaEnableConstraint(bpy.types.Operator):
     
     
     def execute(self, context):
-        obj = context.scene.physika.get_physika_object()
-
+        # obj = context.scene.physika.get_physika_object()
+        obj = context.scene.objects.active
+        vertex_group_name = obj.name + "_PhysikaConstraint"
         if not obj.physika.enable_constraint:
             bpy.ops.object.mode_set(mode='EDIT')
-            obj.vertex_groups.new(name="PhysikaConstraint")
+            obj.vertex_groups.new(name=vertex_group_name)
         
-            vertex_group = obj.vertex_groups.get('PhysikaConstraint')
+            vertex_group = obj.vertex_groups.get(vertex_group_name)
             vertex_group.lock_weight = True
             obj.physika.enable_constraint = True
         else:
             obj.physika.enable_constraint = False
-            vertex_group = obj.vertex_groups.get('PhysikaConstraint')
+            vertex_group = obj.vertex_groups.get(vertex_group_name)
             obj.vertex_groups.remove(vertex_group)
             bpy.ops.object.mode_set(mode='OBJECT')
     
@@ -34,8 +35,12 @@ class PhysiKaAddConstraint(bpy.types.Operator):
     bl_options = {'REGISTER' }
 
     def execute(self, context):
-        obj = context.scene.physika.get_physika_object()
-        vertex_group = obj.vertex_groups.get("PhysikaConstraint")
+        # obj = context.scene.physika.get_physika_object()
+        
+        obj = context.scene.objects.active
+        vertex_group_name = obj.name + "_PhysikaConstraint"
+        
+        vertex_group = obj.vertex_groups.get(vertex_group_name)
         vertex_group.lock_weight = False
         # vertex_index = [ v for v in obj.data.vertices if v.select ]
         # bpy.ops.object.mode_set(mode='OBJECT')
@@ -52,8 +57,10 @@ class PhysikaClearConstraint(bpy.types.Operator):
 
 
     def execute(self, context):
-        obj = context.scene.physika.get_physika_object()
-        vertex_group = obj.vertex_groups.get("PhysikaConstraint")
+        # obj = context.scene.physika.get_physika_object()
+        obj = context.scene.objects.active
+        vertex_group_name = obj.name + "_PhysikaConstraint"
+        vertex_group = obj.vertex_groups.get(vertex_group_name)
         vertex_group.lock_weight = False
         bpy.ops.object.vertex_group_remove_from(use_all_verts = True)
         vertex_group.lock_weight = True        
@@ -69,3 +76,4 @@ def unregister():
     bpy.utils.unregister_class(PhysikaEnableConstraint)
     bpy.utils.unregister_class(PhysiKaAddConstraint)
     bpy.utils.unregister_class(PhysikaClearConstraint)
+

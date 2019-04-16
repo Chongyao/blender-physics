@@ -22,14 +22,14 @@ class BakePhysiKaSimulation(bpy.types.Operator):
         bm.to_mesh(me)
         bm.free()
 
-    def save_input_files(self,context):
+    def save_input_files(self,context, obj):
         script_path = os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
-        discrete_method = context.scene.physika_para.physika_discrete
+        discrete_method = obj.physika.physika_para.physika_discrete
 
         input_path = os.path.join(script_path,'lib',discrete_method,'input')
         save_inputs.clear_cache(context, discrete_method, input_path)
         
-        obj_name = context.scene.physika.physika_object_name
+        obj_name = obj.name
         input_path = os.path.join(input_path, obj_name)
         
         if_tetgen = save_inputs.save_model(context, discrete_method, input_path)
@@ -42,7 +42,7 @@ class BakePhysiKaSimulation(bpy.types.Operator):
 
         
     def run_simulation(self, obj, if_tetgen):
-        res = bake.bake(bpy.context.scene.physika_para.physika_discrete,obj,if_tetgen)
+        res = bake.bake(obj.physika.physika_para.physika_discrete,obj,if_tetgen)
         if res is 0:
             obj.physika.bake.is_bake_finished = True
 
@@ -51,7 +51,7 @@ class BakePhysiKaSimulation(bpy.types.Operator):
         print(os.path.realpath(__file__))
         obj = context.scene.objects.active
         self.triangulate_object(obj)
-        if_tetgen = self.save_input_files(context)
+        if_tetgen = self.save_input_files(context, obj)
         
         if obj.physika.is_active is True:
             self.run_simulation(obj, if_tetgen)

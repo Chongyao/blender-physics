@@ -15,6 +15,10 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import bpy,importlib.util,os,types,sys
+from ..properties.object_properties import PhysiKaObjectProperties
+from bpy.props import(
+    BoolProperty
+)
 
 
 class PhysiKaAdd(bpy.types.Operator):
@@ -37,7 +41,7 @@ class PhysiKaAdd(bpy.types.Operator):
         obj = context.scene.objects.active
         obj.physika.is_active = True
         context.scene.physika.physika_object_name = obj.name
-
+        setattr(PhysiKaObjectProperties, obj.name.replace('.','_') + "_obstacle", BoolProperty(default = False))
         self.init_state_graph(context)
         return {'FINISHED'}
 
@@ -54,6 +58,9 @@ class PhysiKaRemove(bpy.types.Operator):
     def execute(self, context):
         obj = context.scene.objects.active
         # obj.physika.object_type = 'TYPE_NONE'
+        # del PhysiKaObjectProperties.eval(obj.name.replace('.','_') + "_obstacle")
+        #TODO: delete obj.name.replace('.','_') + obstacle
+        delattr(PhysiKaObjectProperties, obj.name.replace('.','_') + "_obstacle")
         obj.physika.is_active = False
         context.scene.physika.physika_object_name = ''
         self.uninit_state_graph(context)

@@ -4,18 +4,7 @@ from bpy.props import(
     CollectionProperty,
     PointerProperty
 )
-class physika_state_properties(bpy.types.PropertyGroup):
-    @classmethod
-    def register(cls):
-        bpy.types.Scene.physika_state = PointerProperty(
-            name = "physika_state",
-            type = cls
-        )
-        cls.state = StringProperty(default = 'obstacle')
-        
-    @classmethod 
-    def unregister(cls):
-        del bpy.types.Scene.physika_state
+
 
 
 class physika_base_state_properties(bpy.types.PropertyGroup):
@@ -40,11 +29,11 @@ class physika_state_graph(bpy.types.PropertyGroup):
 def register():
     bpy.utils.register_class(physika_base_state_properties)
     bpy.utils.register_class(physika_state_graph)
-    bpy.utils.register_class(physika_state_properties)
+
 
 def unregister():
-    # del bpy.types.Scene.physika_state_graph
+
     bpy.utils.unregister_class(physika_base_state_properties)
     bpy.utils.unregister_class(physika_state_graph)
-    bpy.utils.unregister_class(physika_state_properties)
+
 
