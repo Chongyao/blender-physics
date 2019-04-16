@@ -3,14 +3,12 @@ from bpy.props import (
     PointerProperty,
     CollectionProperty,
     IntProperty,
-    BoolProperty
+    BoolProperty,
+    StringProperty
 )
 from ...properties.object_properties import PhysiKaObjectProperties
 
-def scene_chosenobject_poll(self, object):
-    physika_obj_name = bpy.context.scene.objects.active.name
-    return object.type == 'MESH' and object.name != physika_obj_name and object.physika.is_obstacle == False
-    # return object.type == 'MESH'  and object.physika.is_obstacle == False
+
 
 
 
@@ -22,6 +20,11 @@ class physika_obj_ptr(bpy.types.PropertyGroup):
 
 
 class physika_obstacles(bpy.types.PropertyGroup):
+    def scene_chosenobject_poll(self, object):
+        physika_obj = bpy.context.scene.objects.active
+        physika_obj_name = physika_obj.name
+        return object.type == 'MESH' and object.name != physika_obj_name and eval("object.physika." + physika_obj_name.replace('.','_') +  "_obstacle == False")
+
     @classmethod
     def register(cls):
         PhysiKaObjectProperties.obstacles = PointerProperty(

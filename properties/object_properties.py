@@ -38,14 +38,10 @@ class PhysiKaObjectProperties(bpy.types.PropertyGroup):
             type = bake_properties.PyhsikaBakeProperties   
         )
         
-        # cls.state = PointerProperty(
-        #     name = "Physika State properties",
-        #     description = '',
-        #     type = state_properties.physika_state_properties
-        # )
+
         cls.state = StringProperty(default = 'obstacle')
         cls.enable_constraint = BoolProperty(default = False)
-        cls.is_obstacle = BoolProperty(default = False)
+
         cls.obstacles = None
         
     @classmethod    
